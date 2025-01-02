@@ -1,0 +1,254 @@
+.footer {
+  width: 100%;
+  padding-bottom: 96px;
+  padding-top: 158px;
+  background: linear-gradient(
+    165deg,
+    var(--foreground) 9.6%,
+    var(--second_text_color) 10%
+  );
+
+  @media (min-width: 768px) {
+    padding-top: 140px;
+  }
+
+  @media (min-width: 1024px) {
+    background: linear-gradient(
+      177deg,
+      var(--foreground) 12.6%,
+      var(--second_text_color) 13%
+    );
+    padding-top: 180px;
+    padding-bottom: 80px;
+  }
+}
+
+.container {
+  width: var(--container);
+  margin: 0 auto;
+  position: relative;
+
+  @media (min-width: 1408px) {
+    max-width: var(--desktop);
+  }
+}
+
+@media (min-width: 768px) {
+  .wrap {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 22px;
+  }
+
+  .menu_wrap {
+    display: flex;
+    gap: 122px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .wrap {
+    margin-bottom: 43px;
+  }
+
+  .second_wrap {
+    display: flex;
+    gap: 34px;
+  }
+}
+
+.logo_wrap {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 40px;
+  transition: transform 0.3s ease, filter 0.3s ease;
+
+  &:hover {
+    filter: drop-shadow(0px 2px 5px #1c16631a)
+      drop-shadow(0px 9px 20px #1c16631f) drop-shadow(0px 16px 20px #1c16630d)
+      drop-shadow(0px 37px 15px #1c166303) drop-shadow(0px 57px 16px #1c166300);
+    transform: scale(1.05);
+  }
+
+  & span {
+    color: var(--foreground);
+    font-weight: 600;
+    line-height: 1.26;
+    font-size: var(--fs_xsmall);
+  }
+
+  @media (min-width: 768px) {
+    margin: 0;
+    align-self: flex-start;
+    gap: 16px;
+
+    & svg {
+      width: 68px;
+      height: 56px;
+    }
+
+    & span {
+      font-size: 24px;
+    }
+  }
+}
+
+.menu {
+  font-weight: 600;
+  font-size: var(--fs_xsmall);
+  line-height: 1.26;
+  color: var(--foreground);
+  margin-bottom: 24px;
+}
+
+.nav {
+  margin-bottom: 40px;
+
+  & li {
+    margin-bottom: 15px;
+
+    & a {
+      font-family: var(--font_mons);
+      font-size: var(--fs_xsmall);
+      font-weight: 400;
+      line-height: 1.26;
+      color: var(--foreground);
+      letter-spacing: -0.6px;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    transition: transform 0.3s ease, filter 0.3s ease;
+
+    &:hover {
+      filter: drop-shadow(0px 2px 5px #1c16631a)
+        drop-shadow(0px 9px 20px #1c16631f) drop-shadow(0px 16px 20px #1c16630d)
+        drop-shadow(0px 37px 15px #1c166303)
+        drop-shadow(0px 57px 16px #1c166300);
+      transform: scale(1.05);
+    }
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+
+    & li {
+      margin-bottom: 16px;
+      height: 19px;
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+.social {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 40px;
+  height: 32px;
+
+  & li {
+    height: 32px;
+
+    & a {
+      height: 32px;
+
+      & svg {
+        fill: #adb7c2;
+        transition: fill 0.3s ease;
+        width: 32px;
+        height: 32px;
+      }
+
+      & svg:hover {
+        fill: #f5f6fa;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.lang_wrap {
+  margin-bottom: 34px;
+
+  @media (min-width: 768px) {
+    margin-top: 16px;
+  }
+  @media (min-width: 1024px) {
+    margin-bottom: 0;
+  }
+}
+
+.policy_wrap {
+  padding-top: 16px;
+  border-top: 1px solid #adb7c2;
+
+  & a {
+    font-family: var(--font_mons);
+    font-weight: 500;
+    line-height: 1.22;
+    font-size: var(--fs_xsmall);
+    color: #adb7c2;
+
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--foreground);
+    }
+  }
+
+  @media (min-width: 768px) {
+    padding-top: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.button_wrap {
+  margin-bottom: 40px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 0;
+  }
+}
+
+.social_desk {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  height: 32px;
+
+  & li {
+    height: 32px;
+
+    & a {
+      height: 32px;
+
+      & svg {
+        fill: #858d9f;
+        transition: fill 0.3s ease;
+        width: 32px;
+        height: 32px;
+      }
+
+      & svg:hover {
+        fill: var(--foreground);
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+}

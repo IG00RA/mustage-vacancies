@@ -1,0 +1,28 @@
+.language {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+
+  & span {
+    color: #ADB7C2;
+    font-size: var(--fs_xsmall);
+    font-weight: 500;
+    line-height: 1.5;
+  }
+
+  & button {
+    color: #ADB7C2;
+    font-size: var(--fs_xsmall);
+    font-weight: 500;
+    line-height: 1.5;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: var(--foreground);
+    }
+  }
+
+  & .buttonActive {
+    color: var(--foreground);
+  }
+}
