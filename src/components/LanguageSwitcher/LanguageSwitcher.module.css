@@ -3,26 +3,32 @@
   gap: 4px;
   align-items: center;
 
-  & span {
-    color: #ADB7C2;
-    font-size: var(--fs_xsmall);
-    font-weight: 500;
-    line-height: 1.5;
+  & svg {
+    margin-right: 8px;
   }
+}
 
-  & button {
-    color: #ADB7C2;
-    font-size: var(--fs_xsmall);
-    font-weight: 500;
-    line-height: 1.5;
-    transition: color 0.3s ease;
+.button {
+  width: 50px;
+  height: 35px;
+  padding: 8px 12px;
 
-    &:hover {
-      color: var(--foreground);
-    }
+  text-align: center;
+  color: #f5f5f5;
+  font-size: var(--fs_xsmall);
+  line-height: normal;
+  transition: background-color 0.3s ease, border-radius 0.3s ease,
+    text-shadow 0.3s ease, color 0.3s ease;
+
+  &:hover {
+    text-shadow: 0 0 currentColor, 0 0 currentColor;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
   }
+}
 
-  & .buttonActive {
-    color: var(--foreground);
-  }
+.buttonActive {
+  text-shadow: 0 0 currentColor, 0 0 currentColor;
+  border-radius: 100px;
+  background: rgba(255, 255, 255, 0.2);
 }

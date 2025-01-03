@@ -1,3 +1,4 @@
+import Icon from '@/helpers/Icon';
 import styles from './LanguageSwitcher.module.css';
 
 interface LanguageSwitcherProps {
@@ -11,16 +12,7 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
 }) => {
   return (
     <div className={styles.language}>
-      <button
-        className={`${styles.button} ${
-          locale === 'ru' ? styles.buttonActive : ''
-        }`}
-        onClick={() => handleLanguageChange('ru')}
-        type="button"
-      >
-        RU
-      </button>
-      <span>/</span>
+      <Icon name="icon-local" width={24} height={24} />
       <button
         className={`${styles.button} ${
           locale === 'uk' ? styles.buttonActive : ''
@@ -29,6 +21,15 @@ const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
         type="button"
       >
         UA
+      </button>
+      <button
+        className={`${styles.button} ${
+          locale === 'ru' ? styles.buttonActive : ''
+        }`}
+        onClick={() => handleLanguageChange('ru')}
+        type="button"
+      >
+        RU
       </button>
     </div>
   );

@@ -44,46 +44,48 @@ export default function Header({ locale }: { locale: string }) {
     document.body.style.touchAction = 'none';
   };
   return (
-    <header
-      className={`${styles.header} ${isMenuOpen && styles.mobile_menu_open}`}
-    >
-      <Link className={styles.logo_wrap} href={`/${locale}/?${query}`}>
-        <Icon name="icon-header_logo" width={40} height={33} />
-        <span className={styles.logo_text}>{t('Header.home')}</span>
-      </Link>
-      <div className={styles.main_wrap}>
-        <nav>
-          <ul className={styles.nav}>
-            {menuItems.map((item, index) => (
-              <li key={index}>
-                <Link href={item.href}>{t(item.label)}</Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <LanguageSwitcher
-          locale={locale}
-          handleLanguageChange={handleLanguageChange}
-        />
-        <ButtonSec link={CHAT_URL} />
-      </div>
-      <div
-        className={`${styles.burger_wrap} ${
-          isMenuOpen ? styles.burger_open : ''
-        }`}
-        onClick={isMenuOpen ? closeMenu : openMenu}
-      >
-        <span className={styles.line}></span>
-        <span className={styles.line}></span>
-        <span className={styles.line}></span>
-      </div>
-
+    <>
       <MobMenu
+        query={query}
         locale={locale}
         handleLanguageChange={handleLanguageChange}
         isMenuOpen={isMenuOpen}
         closeMenu={closeMenu}
       />
-    </header>
+      <header
+        className={`${styles.header} ${isMenuOpen && styles.mobile_menu_open}`}
+      >
+        <Link className={styles.logo_wrap} href={`/${locale}/?${query}`}>
+          <Icon name="icon-header_logo" width={40} height={33} />
+          <span className={styles.logo_text}>{t('Header.home')}</span>
+        </Link>
+        <div className={styles.main_wrap}>
+          <nav>
+            <ul className={styles.nav}>
+              {menuItems.map((item, index) => (
+                <li key={index}>
+                  <Link href={item.href}>{t(item.label)}</Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <LanguageSwitcher
+            locale={locale}
+            handleLanguageChange={handleLanguageChange}
+          />
+          <ButtonSec link={CHAT_URL} />
+        </div>
+        <div
+          className={`${styles.burger_wrap} ${
+            isMenuOpen ? styles.burger_open : ''
+          }`}
+          onClick={isMenuOpen ? closeMenu : openMenu}
+        >
+          <span className={styles.line}></span>
+          <span className={styles.line}></span>
+          <span className={styles.line}></span>
+        </div>
+      </header>
+    </>
   );
 }
