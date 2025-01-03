@@ -1,6 +1,6 @@
 .header {
   position: absolute;
-  top: 8px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
   width: var(--container);

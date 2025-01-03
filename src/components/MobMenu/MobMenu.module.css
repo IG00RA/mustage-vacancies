@@ -22,7 +22,7 @@
 .burger_menu {
   width: var(--container);
   margin: 0 auto;
-  margin-top: 8px;
+  margin-top: 16px;
   background: rgba(213, 217, 242, 0.2);
   backdrop-filter: blur(30px);
   height: 97vh;
