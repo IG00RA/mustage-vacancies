@@ -1,0 +1,81 @@
+.vacancies {
+  width: 100%;
+  padding: 0 0 96px;
+
+  /* @media (min-width: 1328px) {
+    padding-top: 184px;
+  } */
+}
+
+.container {
+  width: var(--container_mob);
+  margin: 0 auto;
+  border-radius: 40px;
+  background: var(--foreground);
+  padding: 40px 16px 16px;
+}
+
+.header {
+  color: var(--main_text_color);
+  font-size: var(--fs_large);
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 32px;
+
+  & span {
+    color: #888fb9;
+  }
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.item {
+  padding: 24px;
+  border-radius: 32px;
+  background: var(--background);
+  position: relative;
+}
+
+.link {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  width: 56px;
+  height: 56px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--main_color);
+}
+
+.title {
+  font-size: var(--fs_large);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 12px;
+  max-width: 196px;
+}
+
+.description {
+  margin-bottom: 24px;
+}
+
+.skills {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.skill {
+  padding: 12px 16px;
+  border-radius: 100px;
+  background-color: #1df990;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+}
