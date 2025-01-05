@@ -18,24 +18,40 @@ export default function Form() {
 
   const [formData, setFormData] = useState({
     name: '',
-    phone: '',
     nickname: '',
+    comment: '',
+    resumeLink: '',
+    resumeFile: null as File | null,
   });
 
   const [errors, setErrors] = useState({
     name: '',
-    phone: '',
     nickname: '',
+    resumeLink: '',
+    resumeFile: '',
   });
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ): void => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     setErrors({ ...errors, [name]: '' });
   };
 
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
+    const file = e.target.files?.[0] || null;
+    setFormData({ ...formData, resumeFile: file });
+    setErrors({ ...errors, resumeFile: '' });
+  };
+
   const validateForm = (): boolean => {
-    const newErrors = { name: '', phone: '', nickname: '' };
+    const newErrors = {
+      name: '',
+      nickname: '',
+      resumeLink: '',
+      resumeFile: '',
+    };
     let isValid = true;
 
     if (!formData.name) {
@@ -46,19 +62,21 @@ export default function Form() {
       isValid = false;
     }
 
-    if (!formData.phone) {
-      newErrors.phone = t('Form.errors.phoneRequired');
-      isValid = false;
-    } else if (!/^\d{9}$/.test(formData.phone)) {
-      newErrors.phone = t('Form.errors.phoneFormat');
-      isValid = false;
-    }
-
     if (!formData.nickname) {
       newErrors.nickname = t('Form.errors.nickRequired');
       isValid = false;
     } else if (!nicknameRegex.test(formData.nickname)) {
       newErrors.nickname = t('Form.errors.nickFormat');
+      isValid = false;
+    }
+
+    if (formData.resumeLink && !/^https?:\/\//.test(formData.resumeLink)) {
+      newErrors.resumeLink = t('Form.errors.linkFormat');
+      isValid = false;
+    }
+
+    if (formData.resumeFile && formData.resumeFile.type !== 'application/pdf') {
+      newErrors.resumeFile = t('Form.errors.fileFormat');
       isValid = false;
     }
 
@@ -78,11 +96,23 @@ export default function Form() {
         message: 'Користувач відправив форму',
         name: formData.name,
         username: formData.nickname,
-        phone: formData.phone,
+        comment: formData.comment,
+        resumeLink: formData.resumeLink,
         bot: false,
       };
+
+      const fileData = formData.resumeFile;
+
       setIsLoading(true);
       await Promise.all([sendToGoogleScript(message), sendMessage(message)]);
+
+      if (fileData) {
+        const formDataToSend = new FormData();
+        formDataToSend.append('resume', fileData);
+        // Send file data to your server
+        // await sendFileData(formDataToSend);
+      }
+
       toast.success(t('Form.form.ok'));
 
       const currentQueryParams = new URLSearchParams(window.location.search);
@@ -101,74 +131,89 @@ export default function Form() {
   return (
     <section className={styles.form}>
       <div className={styles.container}>
-        <div className={styles.wrap}>
-          <div className={styles.top_wrap}>
-            <Icon name="icon-logo-form" width={58} height={48} />
-            <h2 className={styles.top_text}>{t('Form.headerText')}</h2>
-          </div>
-          <h3 className={styles.header}>
-            {t('Form.header.first')} <br /> {t('Form.header.second')}
-          </h3>
-        </div>
+        <h2 className={styles.header}>{t('Form.header')}</h2>
+        <h4 className={styles.header_text}>{t('Form.headerText')}</h4>
+
         <form className={styles.form_wrap} onSubmit={handleSubmit}>
-          <label className={styles.label}>
+          <label htmlFor="name" className={styles.visuallyHidden}>
             {t('Form.form.name')}
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder={t('Form.form.namePlaceHolder')}
-              className={`${styles.input} ${errors.name ? styles.error : ''}`}
-              required
-            />
-            {errors.name && <p className={styles.error_text}>{errors.name}</p>}
           </label>
-
-          <label className={styles.label}>
-            {t('Form.form.phone')}
-            <div className={styles.phone_wrap}>
-              <div
-                className={`${styles.phone_label} ${
-                  errors.phone ? styles.error : ''
-                }`}
-              >
-                <span>+380</span>
-              </div>
-              <input
-                type="tel"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                placeholder="0993483455"
-                className={`${styles.input} ${
-                  errors.phone ? styles.error : ''
-                }`}
-                required
-              />
-            </div>
-            {errors.phone && (
-              <p className={styles.error_text}>{errors.phone}</p>
-            )}
-          </label>
-
-          <label className={styles.label}>
+          <input
+            type="text"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+            placeholder={t('Form.form.namePlaceHolder')}
+            className={`${styles.input} ${errors.name ? styles.error : ''}`}
+            required
+          />
+          {errors.name && <p className={styles.error_text}>{errors.name}</p>}
+          <label htmlFor="nickname" className={styles.visuallyHidden}>
             {t('Form.form.nick')}
-            <input
-              type="text"
-              name="nickname"
-              value={formData.nickname}
-              onChange={handleChange}
-              placeholder="@nickname"
-              className={`${styles.input} ${
-                errors.nickname ? styles.error : ''
-              }`}
-              required
-            />
-            {errors.nickname && (
-              <p className={styles.error_text}>{errors.nickname}</p>
-            )}
           </label>
+          <input
+            type="text"
+            name="nickname"
+            value={formData.nickname}
+            onChange={handleChange}
+            placeholder={t('Form.form.nickPlaceHolder')}
+            className={`${styles.input} ${errors.nickname ? styles.error : ''}`}
+            required
+          />
+          {errors.nickname && (
+            <p className={styles.error_text}>{errors.nickname}</p>
+          )}
+          <label htmlFor="comment" className={styles.visuallyHidden}>
+            {t('Form.form.content')}
+          </label>
+          <textarea
+            name="comment"
+            value={formData.comment}
+            onChange={handleChange}
+            placeholder={t('Form.form.contentPlaceHolder')}
+            className={`${styles.input} ${styles.textarea} ${
+              errors.name ? styles.error : ''
+            }`}
+          ></textarea>
+          <span className={styles.resumeText}>{t('Form.form.resume')}</span>
+          <div className={styles.customFileInput}>
+            <Icon name="icon-resume" width={16} height={16} />
+            <span className={styles.fileInputText}>
+              {formData.resumeFile
+                ? formData.resumeFile.name
+                : t('Form.form.resumePlaceHolder')}
+            </span>
+            <label htmlFor="resume" className={styles.visuallyHidden}>
+              {t('Form.form.resume')}
+            </label>
+            <input
+              type="file"
+              name="resume"
+              onChange={handleFileChange}
+              className={styles.hiddenFileInput}
+              accept="application/pdf"
+            />
+          </div>
+          {errors.resumeFile && (
+            <p className={styles.errorText}>{errors.resumeFile}</p>
+          )}
+          <span className={styles.or}>{t('Form.form.or')}</span>
+          <label htmlFor="resumeLink" className={styles.visuallyHidden}>
+            {t('Form.form.resumeLink')}
+          </label>
+          <input
+            type="text"
+            name="resumeLink"
+            value={formData.resumeLink}
+            onChange={handleChange}
+            placeholder={t('Form.form.resumeLinkPlaceHolder')}
+            className={`${styles.input} ${
+              errors.resumeLink ? styles.error : ''
+            }`}
+          />
+          {errors.resumeLink && (
+            <p className={styles.error_text}>{errors.resumeLink}</p>
+          )}
           <span
             className={`${styles.loader} ${!isLoading ? styles.hidden : ''}`}
           ></span>
@@ -177,9 +222,29 @@ export default function Form() {
             type="submit"
           >
             {t('Form.form.button')}
-            <Icon name="icon-right-btn" width={24} height={24} />
           </button>
         </form>
+        <div className={styles.question_wrap}>
+          <h3 className={styles.question_text}>{t('Form.questionText')}</h3>
+          <div className={styles.question_link_wrap}>
+            <a
+              className={styles.question_link}
+              href="http://"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="icon-google" width={32} height={32} />
+            </a>
+            <a
+              className={styles.question_link}
+              href="http://"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="icon-tg" width={32} height={32} />
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

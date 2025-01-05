@@ -81,8 +81,11 @@
       "button": "Відправити",
       "resume": "Додайте своє резюме",
       "resumePlaceHolder": "Резюме (.pdf)",
+      "resumeLink": "Посилання на резюме",
+      "resumeLinkPlaceHolder": "Посилання на резюме",
       "nick": "Нікнейм у телеграм",
       "nickPlaceHolder": "Нікнейм у телеграм",
+      "or": "або",
       "ok": "Форма відправлена"
     }
   },

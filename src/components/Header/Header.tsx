@@ -9,12 +9,10 @@ import MobMenu from '../MobMenu/MobMenu';
 import { useEffect, useState } from 'react';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { menuItems } from '@/data/data';
-import ButtonSec from '../Button/ButtonSec';
 
 export default function Header({ locale }: { locale: string }) {
   const pathname = usePathname();
   const router = useRouter();
-  const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || '';
   const [query, setQuery] = useState<URLSearchParams | null>(null);
 
   const t = useTranslations('');
@@ -73,7 +71,6 @@ export default function Header({ locale }: { locale: string }) {
             locale={locale}
             handleLanguageChange={handleLanguageChange}
           />
-          <ButtonSec link={CHAT_URL} />
         </div>
         <div
           className={`${styles.burger_wrap} ${

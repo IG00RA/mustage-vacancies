@@ -5,7 +5,6 @@ import styles from './Footer.module.css';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import Button from '../Button/Button';
 import { menuItems, socialItems } from '@/data/data';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { useEffect, useState } from 'react';
@@ -13,7 +12,6 @@ import { useEffect, useState } from 'react';
 export default function Footer() {
   const t = useTranslations();
   const locale = useLocale();
-  const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || '';
   const [query, setQuery] = useState<URLSearchParams | null>(null);
 
   const pathname = usePathname();
@@ -41,7 +39,6 @@ export default function Footer() {
               <span>{t('Header.home')}</span>
             </Link>
             <div className={styles.nav_wrap}>
-              <p className={styles.menu}>{t('Footer.menu.menu')}</p>
               <nav className={styles.nav}>
                 <ul>
                   {menuItems.map((item, index) => (
@@ -68,9 +65,6 @@ export default function Footer() {
                 locale={locale}
                 handleLanguageChange={handleLanguageChange}
               />
-            </div>
-            <div className={styles.button_wrap}>
-              <Button link={CHAT_URL} />
             </div>
           </div>
         </div>
