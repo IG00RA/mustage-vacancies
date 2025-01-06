@@ -3,10 +3,11 @@
 import Icon from '@/helpers/Icon';
 import styles from './Form.module.css';
 import { useLocale, useTranslations } from 'next-intl';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, MouseEvent } from 'react';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/navigation';
 import { sendMessage, sendToGoogleScript } from '@/api/sendData';
+import { useRef } from 'react';
 
 export default function Form() {
   const t = useTranslations();
@@ -31,6 +32,12 @@ export default function Form() {
     resumeFile: '',
   });
 
+  const hiddenFileInputRef = useRef<HTMLInputElement | null>(null);
+
+  const handleDivClick = () => {
+    hiddenFileInputRef.current?.click();
+  };
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ): void => {
@@ -45,6 +52,11 @@ export default function Form() {
     setErrors({ ...errors, resumeFile: '' });
   };
 
+  const handleFileClose = (e: MouseEvent<HTMLSpanElement>): void => {
+    e.stopPropagation();
+    setFormData({ ...formData, resumeFile: null });
+  };
+
   const validateForm = (): boolean => {
     const newErrors = {
       name: '',
@@ -55,7 +67,7 @@ export default function Form() {
     let isValid = true;
 
     if (!formData.name) {
-      newErrors.name = t('Form.errors.nameRequired');
+      newErrors.name = t('Form.errors.required');
       isValid = false;
     } else if (formData.name.length > 100) {
       newErrors.name = t('Form.errors.nameLength');
@@ -63,10 +75,16 @@ export default function Form() {
     }
 
     if (!formData.nickname) {
-      newErrors.nickname = t('Form.errors.nickRequired');
+      newErrors.nickname = t('Form.errors.required');
       isValid = false;
     } else if (!nicknameRegex.test(formData.nickname)) {
       newErrors.nickname = t('Form.errors.nickFormat');
+      isValid = false;
+    }
+
+    if (!formData.resumeFile && !formData.resumeLink) {
+      newErrors.resumeFile = t('Form.errors.fileOrLinkRequired');
+      newErrors.resumeLink = t('Form.errors.fileOrLinkRequired');
       isValid = false;
     }
 
@@ -109,8 +127,6 @@ export default function Form() {
       if (fileData) {
         const formDataToSend = new FormData();
         formDataToSend.append('resume', fileData);
-        // Send file data to your server
-        // await sendFileData(formDataToSend);
       }
 
       toast.success(t('Form.form.ok'));
@@ -145,9 +161,9 @@ export default function Form() {
             onChange={handleChange}
             placeholder={t('Form.form.namePlaceHolder')}
             className={`${styles.input} ${errors.name ? styles.error : ''}`}
-            required
           />
           {errors.name && <p className={styles.error_text}>{errors.name}</p>}
+
           <label htmlFor="nickname" className={styles.visuallyHidden}>
             {t('Form.form.nick')}
           </label>
@@ -158,11 +174,11 @@ export default function Form() {
             onChange={handleChange}
             placeholder={t('Form.form.nickPlaceHolder')}
             className={`${styles.input} ${errors.nickname ? styles.error : ''}`}
-            required
           />
           {errors.nickname && (
             <p className={styles.error_text}>{errors.nickname}</p>
           )}
+
           <label htmlFor="comment" className={styles.visuallyHidden}>
             {t('Form.form.content')}
           </label>
@@ -175,18 +191,33 @@ export default function Form() {
               errors.name ? styles.error : ''
             }`}
           ></textarea>
+
           <span className={styles.resumeText}>{t('Form.form.resume')}</span>
-          <div className={styles.customFileInput}>
-            <Icon name="icon-resume" width={16} height={16} />
+          <div
+            onClick={handleDivClick}
+            className={`${styles.customFileInput} ${
+              formData.resumeFile && styles.active_file
+            } ${errors.resumeLink ? styles.errorResume : ''}`}
+          >
+            {!formData.resumeFile && (
+              <Icon name="icon-resume" width={16} height={16} />
+            )}
             <span className={styles.fileInputText}>
               {formData.resumeFile
                 ? formData.resumeFile.name
                 : t('Form.form.resumePlaceHolder')}
             </span>
+            {formData.resumeFile && (
+              <span className={styles.close_icon} onClick={handleFileClose}>
+                <Icon name="icon-close" width={24} height={24} />
+              </span>
+            )}
+
             <label htmlFor="resume" className={styles.visuallyHidden}>
               {t('Form.form.resume')}
             </label>
             <input
+              ref={hiddenFileInputRef}
               type="file"
               name="resume"
               onChange={handleFileChange}
@@ -194,9 +225,7 @@ export default function Form() {
               accept="application/pdf"
             />
           </div>
-          {errors.resumeFile && (
-            <p className={styles.errorText}>{errors.resumeFile}</p>
-          )}
+
           <span className={styles.or}>{t('Form.form.or')}</span>
           <label htmlFor="resumeLink" className={styles.visuallyHidden}>
             {t('Form.form.resumeLink')}
@@ -214,6 +243,7 @@ export default function Form() {
           {errors.resumeLink && (
             <p className={styles.error_text}>{errors.resumeLink}</p>
           )}
+
           <span
             className={`${styles.loader} ${!isLoading ? styles.hidden : ''}`}
           ></span>
@@ -224,26 +254,26 @@ export default function Form() {
             {t('Form.form.button')}
           </button>
         </form>
-        <div className={styles.question_wrap}>
-          <h3 className={styles.question_text}>{t('Form.questionText')}</h3>
-          <div className={styles.question_link_wrap}>
-            <a
-              className={styles.question_link}
-              href="http://"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon name="icon-google" width={32} height={32} />
-            </a>
-            <a
-              className={styles.question_link}
-              href="http://"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Icon name="icon-tg" width={32} height={32} />
-            </a>
-          </div>
+      </div>
+      <div className={styles.question_wrap}>
+        <h3 className={styles.question_text}>{t('Form.questionText')}</h3>
+        <div className={styles.question_link_wrap}>
+          <a
+            className={styles.question_link}
+            href="http://"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="icon-google" width={32} height={32} />
+          </a>
+          <a
+            className={styles.question_link}
+            href="http://"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="icon-tg" width={32} height={32} />
+          </a>
         </div>
       </div>
     </section>

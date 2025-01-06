@@ -1,26 +1,8 @@
 .footer {
   width: 100%;
-  padding-bottom: 96px;
-  padding-top: 158px;
-  background: linear-gradient(
-    165deg,
-    var(--foreground) 9.6%,
-    var(--second_text_color) 10%
-  );
-
-  @media (min-width: 768px) {
-    padding-top: 140px;
-  }
-
-  @media (min-width: 1024px) {
-    background: linear-gradient(
-      177deg,
-      var(--foreground) 12.6%,
-      var(--second_text_color) 13%
-    );
-    padding-top: 180px;
-    padding-bottom: 80px;
-  }
+  border-radius: 40px 40px 0px 0px;
+  background-color: var(--main_color);
+  padding: 40px 16px 96px 16px;
 }
 
 .container {

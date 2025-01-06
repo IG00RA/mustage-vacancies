@@ -14,6 +14,7 @@
       rgba(29, 249, 144, 0.6) 100%
     ),
     #fff;
+  margin-bottom: 40px;
 }
 
 .header {
@@ -102,21 +103,31 @@
 .textarea {
   border-radius: 24px;
   height: 160px;
-
   margin-bottom: 24px;
   resize: none;
-  & div {
-    color: var(--second_text_color);
-    font-size: var(--fs_small);
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
+  color: var(--second_text_color);
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  font-family: var(--font_ukr);
+  font-size: 13px;
+  letter-spacing: -1px;
 }
 
 .textarea:focus,
 .textarea:hover {
   border-radius: 24px;
+}
+
+.textarea::placeholder {
+  font-family: inherit;
+  color: var(--second_text_color);
+  font-weight: 300 !important;
+  line-height: normal;
+  transition: all 0.3s ease;
+  font-family: var(--font_ukr);
+  font-size: 13px;
+  letter-spacing: -1px;
 }
 
 .customFileInput {
@@ -164,8 +175,29 @@
   margin-bottom: 16px;
   margin-left: 8px;
 }
+
 .hiddenFileInput {
   display: none;
+}
+
+.close_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+
+  &:hover,
+  &:focus {
+    transform: scale(1.1);
+  }
+}
+
+.active_file {
+  justify-content: space-between;
+  border: 1px solid #b5bbe1;
+  background-color: var(--background);
 }
 
 .or {
@@ -205,16 +237,23 @@
 
 .error {
   border: 1px solid #d95043;
-  background-color: #ffe0de;
   outline: none;
+  margin-bottom: 0;
+}
+
+.errorResume {
+  border: 1px dashed #d95043;
+  outline: none;
+  margin-bottom: 0;
 }
 
 .error_text {
-  font-size: var(--fs_small);
+  color: #ff476c;
+  font-size: 12px;
+  font-style: normal;
   font-weight: 300;
-  line-height: 1.26;
-  margin-top: 6px;
-  color: #fd7542;
+  line-height: normal;
+  margin-bottom: 17px;
 }
 
 .button {
@@ -260,4 +299,18 @@
 
 .hidden {
   display: none;
+}
+
+.question_wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.question_text {
+  color: var(--second_text_color);
+  font-size: var(--fs_large);
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.2;
 }
