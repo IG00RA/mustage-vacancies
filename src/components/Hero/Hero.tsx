@@ -33,7 +33,7 @@ export default function Hero() {
   useEffect(() => {
     const updateGroups = () => {
       const screenWidth = window.innerWidth;
-      const groupSize = screenWidth >= 768 && screenWidth < 1250 ? 10 : 4;
+      const groupSize = screenWidth >= 1024 ? 10 : 4;
       setGroupedItems(groupItems(originalGalleryImages, groupSize));
     };
     updateGroups();
@@ -59,6 +59,7 @@ export default function Hero() {
           />
           <h1 className={styles.header}>{t('Hero.header')}</h1>
         </div>
+        <div className={styles.back}></div>
         <h2 className={styles.logo_text}>{t('Hero.text')}</h2>
         <div className={styles.block_wrap}>
           <div className={styles.first_block}>
