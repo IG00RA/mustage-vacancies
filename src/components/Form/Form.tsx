@@ -258,21 +258,32 @@ export default function Form() {
       <div className={styles.question_wrap}>
         <h3 className={styles.question_text}>{t('Form.questionText')}</h3>
         <div className={styles.question_link_wrap}>
-          <a
-            className={styles.question_link}
-            href="http://"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name="icon-google" width={32} height={32} />
+          <a className={styles.question_link} href="mailto:support@mustage.io">
+            <div className={styles.question_link_icon}>
+              <Icon name="icon-google" width={32} height={32} />
+            </div>
+            <div className={styles.question_link_icon_hover}>
+              <Icon name="icon-google_hov" width={32} height={32} />
+            </div>
+            <span className={styles.question_link_text}>E-mail</span>
           </a>
           <a
-            className={styles.question_link}
-            href="http://"
+            className={`${styles.question_link} ${styles.question_link_tg}`}
+            href="https://t.me/usaffiliate"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Icon name="icon-tg" width={32} height={32} />
+            <div className={styles.question_link_icon}>
+              <Icon name="icon-tg" width={32} height={32} />
+            </div>
+            <div className={styles.question_link_icon_hover}>
+              <Icon name="icon-tg_hov" width={32} height={32} />
+            </div>
+            <span
+              className={`${styles.question_link_text} ${styles.question_link_text_tg}`}
+            >
+              Telegram
+            </span>
           </a>
         </div>
       </div>
