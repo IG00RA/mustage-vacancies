@@ -57,16 +57,18 @@ export default function Header({ locale }: { locale: string }) {
           <Icon name="icon-header_logo" width={40} height={33} />
           <span className={styles.logo_text}>{t('Header.home')}</span>
         </Link>
-        <div className={styles.main_wrap}>
-          <nav>
-            <ul className={styles.nav}>
-              {menuItems.map((item, index) => (
-                <li key={index}>
-                  <Link href={item.href}>{t(item.label)}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
+        <nav className={styles.nav}>
+          <ul className={styles.nav_list}>
+            {menuItems.map((item, index) => (
+              <li key={index}>
+                <Link className={styles.nav_item} href={item.href}>
+                  {t(item.label)}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </nav>
+        <div className={styles.lang_wrap}>
           <LanguageSwitcher
             locale={locale}
             handleLanguageChange={handleLanguageChange}
