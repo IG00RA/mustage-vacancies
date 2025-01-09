@@ -33,7 +33,7 @@
     padding: 155px 0 48px;
   }
 
-  @media (min-width: 1428px) {
+  @media (min-width: 1408px) {
     max-width: var(--desktop);
   }
 }

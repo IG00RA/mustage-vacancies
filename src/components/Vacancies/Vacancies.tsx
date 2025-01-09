@@ -39,10 +39,12 @@ export default function Vacancies() {
         <ul className={styles.list}>
           {vacancies.map(vacancy => (
             <li key={vacancy.id} className={styles.item}>
-              <Link href={`/${vacancy.id}`} className={styles.link}>
-                <Icon name="icon-arrow" width={16} height={16} />
-              </Link>
-              <h3 className={styles.title}>{vacancy.Title}</h3>
+              <div className={styles.title_wrap}>
+                <h3 className={styles.title}>{vacancy.Title}</h3>
+                <Link href={`/${vacancy.id}`} className={styles.link}>
+                  <Icon name="icon-arrow" width={16} height={16} />
+                </Link>
+              </div>
               <p className={styles.description}>{vacancy.Description}</p>
               <div className={styles.skills}>
                 {vacancy.Skills.map(skill => (

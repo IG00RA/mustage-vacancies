@@ -1,18 +1,30 @@
 .vacancies {
-  width: 100%;
-  padding: 0 0 96px;
-
-  /* @media (min-width: 1328px) {
-    padding-top: 184px;
-  } */
-}
-
-.container {
-  width: var(--container_mob);
   margin: 0 auto;
+  margin-bottom: 96px;
+  width: var(--container_mob);
   border-radius: 40px;
   background: var(--foreground);
   padding: 40px 16px 16px;
+  @media (min-width: 1024px) {
+    width: 98%;
+    border-radius: 80px;
+    margin-bottom: 80px;
+    padding-bottom: 30px;
+  }
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+
+  @media (min-width: 768px) {
+    width: 93%;
+    padding: 30px 0;
+  }
+
+  @media (min-width: 1408px) {
+    max-width: var(--desktop);
+  }
 }
 
 .header {
@@ -25,25 +37,83 @@
   & span {
     color: #888fb9;
   }
+
+  @media (min-width: 768px) {
+    max-width: 660px;
+    font-size: var(--fs_xlarge);
+    margin-bottom: 60px;
+  }
+
+  @media (min-width: 1024px) {
+    margin-bottom: 90px;
+    font-size: 48px;
+    line-height: 1.2;
+    max-width: 1200px;
+    margin-left: 10px;
+  }
 }
 
 .list {
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  @media (min-width: 1328px) {
+    gap: 32px;
+  }
 }
 
 .item {
+  margin: 0 auto;
+  max-width: var(--mobile_xl);
   padding: 24px;
   border-radius: 32px;
   background: var(--background);
-  position: relative;
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+
+  @media (min-width: 768px) {
+    max-width: none;
+    width: calc(100% / 2 - 8px);
+  }
+
+  @media (min-width: 1024px) {
+    width: calc(100% / 3 - 11px);
+    border-radius: 40px;
+    gap: 24px;
+  }
+
+  @media (min-width: 1328px) {
+    width: calc(100% / 3 - 22px);
+    padding: 32px;
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid #1a75ff;
+    box-shadow: -10px 0px 24px 0px rgba(26, 117, 255, 0.3),
+      10px 0px 24px 0px rgba(29, 249, 144, 0.3);
+  }
+}
+
+.title_wrap {
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  @media (min-width: 1024px) {
+    gap: 16px;
+  }
 }
 
 .link {
-  position: absolute;
-  top: 24px;
-  right: 24px;
+  flex-shrink: 0;
   display: flex;
   width: 56px;
   height: 56px;
@@ -54,21 +124,30 @@
 }
 
 .title {
-  font-size: var(--fs_large);
+  font-size: var(--fs_medium);
   font-weight: 500;
   line-height: 1.2;
-  margin-bottom: 12px;
-  max-width: 196px;
+  @media (min-width: 350px) {
+    font-size: var(--fs_large);
+  }
 }
 
 .description {
-  margin-bottom: 24px;
+  margin-bottom: 12px;
+  @media (min-width: 1024px) {
+    font-size: var(--fs_xsmall);
+  }
 }
 
 .skills {
   display: flex;
   gap: 6px;
   align-items: center;
+  flex-wrap: wrap;
+  margin-top: auto;
+  @media (min-width: 1024px) {
+    gap: 8px;
+  }
 }
 
 .skill {
@@ -78,4 +157,9 @@
   font-size: 12px;
   font-weight: 700;
   line-height: 1.2;
+
+  @media (min-width: 1024px) {
+    font-size: var(--fs_xsmall);
+    font-weight: 500;
+  }
 }
