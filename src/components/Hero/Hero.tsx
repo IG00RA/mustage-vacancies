@@ -33,7 +33,10 @@ export default function Hero() {
   useEffect(() => {
     const updateGroups = () => {
       const screenWidth = window.innerWidth;
-      const groupSize = screenWidth >= 1024 ? 10 : 4;
+      let groupSize = 4;
+      screenWidth >= 768 && screenWidth <= 1023 && (groupSize = 6);
+      screenWidth >= 1024 && (groupSize = 10);
+
       setGroupedItems(groupItems(originalGalleryImages, groupSize));
     };
     updateGroups();

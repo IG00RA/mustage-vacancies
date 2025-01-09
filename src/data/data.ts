@@ -12,22 +12,27 @@ export const offerItems = [
   {
     header: 'Offer.blockHeader.first',
     logo: 'icon-calendar',
+    logo_hov: 'icon-calendar_hov',
   },
   {
     header: 'Offer.blockHeader.second',
     logo: 'icon-clock',
+    logo_hov: 'icon-clock_hov',
   },
   {
     header: 'Offer.blockHeader.third',
     logo: 'icon-card',
+    logo_hov: 'icon-card_hov',
   },
   {
     header: 'Offer.blockHeader.fourth',
     logo: 'icon-grow',
+    logo_hov: 'icon-grow_hov',
   },
   {
     header: 'Offer.blockHeader.fifth',
     logo: 'icon-case',
+    logo_hov: 'icon-case_hov',
   },
 ];
 

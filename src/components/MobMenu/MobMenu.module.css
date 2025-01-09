@@ -11,6 +11,7 @@
   transition: transform 500ms ease-in-out, opacity 500ms ease-in-out,
     height 500ms ease-in-out;
   background: rgba(20, 20, 20, 0.4);
+  z-index: 1;
 }
 
 .mobile_menu_open {

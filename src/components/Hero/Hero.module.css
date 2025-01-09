@@ -9,6 +9,7 @@
   @media (min-width: 1024px) {
     border-radius: 80px;
     width: 98%;
+    margin-bottom: 140px;
   }
 }
 
@@ -17,11 +18,15 @@
   margin: 0 auto;
   padding: 107px 20px 20px;
   background-image: url('../../img/hero/back_mob.webp');
-  background-position: top 236px right -8px;
+  background-position: top 23% right -8px;
   background-repeat: no-repeat;
   background-size: 302px 286px;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 475px) {
+    background-position: top 22% right -8px;
+  }
+
+  @media (min-width: 768px) {
     position: relative;
     width: 93%;
     background-image: none;
@@ -35,13 +40,17 @@
 
 .back {
   position: absolute;
-  top: 12%;
+  top: 17%;
   right: -65px;
   background-image: url('../../img/hero/back.webp');
   background-size: cover;
   width: 45%;
   aspect-ratio: 593/474;
   z-index: 1;
+
+  @media (min-width: 900px) {
+    top: 12%;
+  }
 
   @media (min-width: 1228px) {
     top: 10%;
@@ -51,7 +60,7 @@
     top: 6%;
   }
 
-  @media (max-width: 1023px) {
+  @media (max-width: 767px) {
     display: none;
   }
 }
@@ -61,9 +70,12 @@
   align-items: center;
   gap: 12px;
 
-  @media (min-width: 1024px) {
-    gap: 20px;
+  @media (min-width: 475px) {
     margin-bottom: 16px;
+  }
+
+  @media (min-width: 768px) {
+    gap: 20px;
   }
 }
 
@@ -91,9 +103,17 @@
   line-height: 1;
   margin-bottom: 8px;
 
+  @media (min-width: 475px) {
+    line-height: 1.23;
+  }
+
+  @media (min-width: 768px) {
+    line-height: 1.23;
+    font-size: 50px;
+  }
+
   @media (min-width: 1024px) {
     margin-bottom: 0;
-    line-height: 1.23;
     font-size: var(--fs_xxlarge);
   }
 
@@ -115,11 +135,22 @@
   font-weight: 400;
   line-height: 1.2;
   margin-bottom: 160px;
+  max-width: 350px;
+
+  @media (min-width: 560px) {
+    margin-bottom: 80px;
+    max-width: 425px;
+  }
+
+  @media (min-width: 768px) {
+    margin-bottom: 40px;
+    font-size: var(--fs_xlarge);
+    line-height: normal;
+    max-width: 550px;
+  }
 
   @media (min-width: 1024px) {
-    margin-bottom: 40px;
     font-size: 40px;
-    line-height: normal;
     max-width: 700px;
   }
 
@@ -135,24 +166,32 @@
   gap: 8px;
   margin-bottom: 32px;
 
+  @media (min-width: 768px) {
+    margin-bottom: 40px;
+    flex-direction: row;
+    gap: 16px;
+  }
+
   @media (min-width: 1024px) {
     margin-bottom: 56px;
-    flex-direction: row;
     gap: 32px;
   }
 }
 
 .first_block {
+  margin: 0 auto;
   padding: 24px;
   border-radius: 32px;
   border: 1px solid #1a75ff;
   background: linear-gradient(98deg, #1a75ff 0%, #1df990 100%),
     rgba(8, 40, 89, 0.4);
+  flex: 1;
+  max-width: var(--mobile_xl);
 
   @media (min-width: 1024px) {
+    max-width: none;
     padding: 32px 24px;
     border-radius: 40px;
-    flex: 1;
   }
 }
 
@@ -182,15 +221,18 @@
 }
 
 .second_block {
+  margin: 0 auto;
   padding: 24px;
   border-radius: 32px;
   border: 1px solid #1a75ff;
   background: rgba(8, 40, 89, 0.4);
   backdrop-filter: blur(30px);
+  flex: 1;
+  max-width: var(--mobile_xl);
   @media (min-width: 1024px) {
+    max-width: none;
     padding: 32px 24px;
     border-radius: 40px;
-    flex: 1;
   }
 }
 
@@ -224,10 +266,14 @@
   color: #d5d9f2;
   font-size: var(--fs_xsmall);
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     max-width: none;
-    font-size: var(--fs_large);
+    font-size: var(--fs_medium);
     line-height: 1.5;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: var(--fs_large);
   }
 }
 
@@ -244,18 +290,21 @@
   background-color: rgba(213, 217, 242, 0.1);
   cursor: pointer;
   transition: background-color 0.3s ease;
+
+  @media (min-width: 768px) {
+    width: calc(100% / 3 - 38px);
+  }
   @media (min-width: 1024px) {
     width: calc(100% / 4 - 55px);
     padding: 29px 24px;
     border-radius: 24px;
   }
-    @media (min-width: 1200px) {
+  @media (min-width: 1200px) {
     width: calc(100% / 5 - 55px);
   }
 
   &:hover,
   &:focus {
-    border-radius: 24px;
     background-color: rgba(213, 217, 242, 0.4);
 
     & .list_text {
@@ -326,11 +375,6 @@
 
   &:hover {
     box-shadow: 0px 0px 5px 5px #ffffff4d;
-  }
-
-  @media (min-width: 768px) {
-    width: 45px;
-    height: 45px;
   }
 }
 
