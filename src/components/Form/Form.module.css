@@ -1,11 +1,19 @@
 .form {
   width: var(--container_mob);
+  max-width: 550px;
   margin: 0 auto;
   padding-bottom: 96px;
+
+  @media (min-width: 1024px) {
+    max-width: var(--desktop);
+    padding-bottom: 144px;
+  }
 }
 
 .container {
+  margin: 0 auto;
   width: 100%;
+
   padding: 40px 16px 16px;
   border-radius: 40px;
   background: linear-gradient(
@@ -15,6 +23,23 @@
     ),
     #fff;
   margin-bottom: 40px;
+
+  @media (min-width: 1024px) {
+    border-radius: 60px;
+    padding: 40px 60px;
+    margin-bottom: 60px;
+    display: flex;
+    gap: 30px;
+  }
+
+  @media (min-width: 1328px) {
+    padding: 60px 80px;
+    gap: 60px;
+  }
+}
+
+.text_wrap {
+  flex: 1;
 }
 
 .header {
@@ -24,6 +49,12 @@
   line-height: 1.2;
   margin-bottom: 16px;
   margin-left: 8px;
+
+  @media (min-width: 1024px) {
+    margin-left: 0;
+    margin-bottom: 24px;
+    font-size: 48px;
+  }
 }
 
 .header_text {
@@ -33,15 +64,28 @@
   line-height: 1.5;
   margin-bottom: 32px;
   margin-left: 8px;
+
+  @media (min-width: 1024px) {
+    max-width: 535px;
+    margin-left: 0;
+    margin-bottom: 0;
+    font-size: var(--fs_medium);
+  }
 }
 
 .form_wrap {
   padding: 24px 16px;
   border-radius: 32px;
   background: var(--background);
+
+  @media (min-width: 768px) {
+    padding: 40px;
+    flex: 1;
+    max-width: 531px;
+  }
 }
 
-.visuallyHidden {
+.visually_hidden {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -71,6 +115,11 @@
   line-height: normal;
   width: 100%;
   margin-bottom: 16px;
+
+  @media (min-width: 768px) {
+    padding: 16px 32px;
+    font-size: var(--fs_xsmall);
+  }
 }
 
 .input::placeholder {
@@ -79,6 +128,10 @@
   font-weight: 400;
   line-height: normal;
   transition: all 0.3s ease;
+
+  @media (min-width: 768px) {
+    font-size: var(--fs_xsmall);
+  }
 }
 
 .input:focus,
@@ -110,11 +163,6 @@
   resize: none;
   color: var(--second_text_color);
   font-style: normal;
-  /* font-weight: 300;
-  line-height: normal;
-  font-family: var(--font_ukr);
-  font-size: 13px;
-  letter-spacing: -1px; */
 }
 
 .textarea:focus,
@@ -126,14 +174,9 @@
   font-family: inherit;
   color: var(--second_text_color);
   transition: all 0.3s ease;
-  /* font-weight: 300 !important;
-  line-height: normal;
-  font-family: var(--font_ukr);
-  font-size: 13px;
-  letter-spacing: -1px; */
 }
 
-.customFileInput {
+.custom_file_input {
   position: relative;
   width: 100%;
   height: 56px;
@@ -147,13 +190,19 @@
   align-items: center;
   transition: background-color 0.3s ease, border-color 0.3s ease;
   margin-bottom: 12px;
+
+  @media (min-width: 768px) {
+    margin-bottom: 16px;
+  }
 }
-.customFileInput:hover,
-.customFileInput:focus {
+
+.custom_file_input:hover,
+.custom_file_input:focus {
   background-color: rgba(225, 228, 242, 0.3);
   border-color: #1a75ff;
 }
-.customFileInput input[type='file'] {
+
+.custom_file_input input[type='file'] {
   position: absolute;
   top: 0;
   left: 0;
@@ -162,13 +211,19 @@
   opacity: 0;
   cursor: pointer;
 }
-.fileInputText {
+
+.file_input_text {
   display: block;
   font-size: var(--fs_small);
   color: var(--second_text_color);
   line-height: normal;
+
+  @media (min-width: 768px) {
+    font-size: var(--fs_xsmall);
+  }
 }
-.resumeText {
+
+.resume_text {
   display: block;
   color: var(--second_text_color);
   font-size: var(--fs_small);
@@ -177,10 +232,11 @@
   line-height: normal;
   margin-bottom: 16px;
   margin-left: 8px;
-}
 
-.hiddenFileInput {
-  display: none;
+  @media (min-width: 768px) {
+    font-size: var(--fs_xsmall);
+    margin-left: 0;
+  }
 }
 
 .close_icon {
@@ -217,6 +273,11 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  @media (min-width: 768px) {
+    font-size: var(--fs_xsmall);
+    margin-bottom: 16px;
+  }
 }
 
 .or::before,
@@ -231,11 +292,19 @@
 .or::before {
   left: 0;
   right: calc(70% - 16px);
+
+  @media (min-width: 768px) {
+    right: calc(60% - 16px);
+  }
 }
 
 .or::after {
   right: 0;
   left: calc(70% - 16px);
+
+  @media (min-width: 768px) {
+    left: calc(60% - 16px);
+  }
 }
 
 .error {
@@ -244,7 +313,7 @@
   margin-bottom: 0;
 }
 
-.errorResume {
+.error_resume {
   border: 1px dashed #d95043;
   outline: none;
   margin-bottom: 0;
@@ -271,6 +340,12 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @media (min-width: 768px) {
+    padding: 22px 40px;
+    height: 64px;
+    margin-top: 15px;
+  }
 }
 
 .button:hover,
@@ -309,6 +384,13 @@
   flex-direction: column;
   gap: 24px;
   padding: 0 8px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row;
+    gap: 64px;
+    padding: 0;
+    align-items: center;
+  }
 }
 
 .question_text {
@@ -317,11 +399,19 @@
   font-style: normal;
   font-weight: 500;
   line-height: 1.2;
+
+  @media (min-width: 1024px) {
+    max-width: 390px;
+  }
 }
 
 .question_link_wrap {
   display: flex;
   gap: 8px;
+
+  @media (min-width: 1024px) {
+    gap: 16px;
+  }
 }
 
 .question_link {
@@ -336,6 +426,11 @@
   width: 88px;
   height: 88px;
   transition: width 0.3s ease, gap 0.3s ease;
+
+  @media (min-width: 1024px) {
+    width: 112px;
+    height: 112px;
+  }
 }
 
 .question_link:hover,
@@ -356,6 +451,15 @@
     opacity: 1;
     width: 56px;
   }
+
+  @media (min-width: 1024px) {
+    width: 212px;
+    gap: 16px;
+    height: 112px;
+    .question_link_text {
+      width: 84px;
+    }
+  }
 }
 
 .question_link_tg:hover,
@@ -368,12 +472,26 @@
     opacity: 1;
     width: 83px;
   }
+
+  @media (min-width: 1024px) {
+    width: 252px;
+    height: 112px;
+    .question_link_text_tg {
+      width: 124px;
+    }
+  }
 }
 
 .question_link_icon {
   display: flex;
   justify-content: center;
   align-items: center;
+  @media (min-width: 1024px) {
+    & svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
 }
 
 .question_link_text {
@@ -386,6 +504,10 @@
   font-weight: 500;
   line-height: 1.2;
   white-space: nowrap;
+
+  @media (min-width: 1024px) {
+    font-size: var(--fs_large);
+  }
 }
 
 .question_link_text_tg {
@@ -401,4 +523,13 @@
   align-items: center;
   opacity: 0;
   z-index: 1;
+
+  @media (min-width: 1024px) {
+    top: 32px;
+    left: 32px;
+    & svg {
+      width: 48px;
+      height: 48px;
+    }
+  }
 }

@@ -284,6 +284,7 @@
 }
 
 .list_item {
+  margin: 0 auto;
   width: calc(50% - 36px);
   padding: 16px;
   border-radius: 16px;

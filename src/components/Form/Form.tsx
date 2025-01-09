@@ -147,11 +147,12 @@ export default function Form() {
   return (
     <section className={styles.form}>
       <div className={styles.container}>
-        <h2 className={styles.header}>{t('Form.header')}</h2>
-        <h4 className={styles.header_text}>{t('Form.headerText')}</h4>
-
+        <div className={styles.text_wrap}>
+          <h2 className={styles.header}>{t('Form.header')}</h2>
+          <h4 className={styles.header_text}>{t('Form.headerText')}</h4>
+        </div>
         <form className={styles.form_wrap} onSubmit={handleSubmit}>
-          <label htmlFor="name" className={styles.visuallyHidden}>
+          <label htmlFor="name" className={styles.visually_hidden}>
             {t('Form.form.name')}
           </label>
           <input
@@ -164,7 +165,7 @@ export default function Form() {
           />
           {errors.name && <p className={styles.error_text}>{errors.name}</p>}
 
-          <label htmlFor="nickname" className={styles.visuallyHidden}>
+          <label htmlFor="nickname" className={styles.visually_hidden}>
             {t('Form.form.nick')}
           </label>
           <input
@@ -179,7 +180,7 @@ export default function Form() {
             <p className={styles.error_text}>{errors.nickname}</p>
           )}
 
-          <label htmlFor="comment" className={styles.visuallyHidden}>
+          <label htmlFor="comment" className={styles.visually_hidden}>
             {t('Form.form.content')}
           </label>
           <textarea
@@ -192,17 +193,17 @@ export default function Form() {
             }`}
           ></textarea>
 
-          <span className={styles.resumeText}>{t('Form.form.resume')}</span>
+          <span className={styles.resume_text}>{t('Form.form.resume')}</span>
           <div
             onClick={handleDivClick}
-            className={`${styles.customFileInput} ${
+            className={`${styles.custom_file_input} ${
               formData.resumeFile && styles.active_file
-            } ${errors.resumeLink ? styles.errorResume : ''}`}
+            } ${errors.resumeLink ? styles.error_resume : ''}`}
           >
             {!formData.resumeFile && (
               <Icon name="icon-resume" width={16} height={16} />
             )}
-            <span className={styles.fileInputText}>
+            <span className={styles.file_input_text}>
               {formData.resumeFile
                 ? formData.resumeFile.name
                 : t('Form.form.resumePlaceHolder')}
@@ -213,7 +214,7 @@ export default function Form() {
               </span>
             )}
 
-            <label htmlFor="resume" className={styles.visuallyHidden}>
+            <label htmlFor="resume" className={styles.visually_hidden}>
               {t('Form.form.resume')}
             </label>
             <input
@@ -221,13 +222,13 @@ export default function Form() {
               type="file"
               name="resume"
               onChange={handleFileChange}
-              className={styles.hiddenFileInput}
+              className={styles.hidden}
               accept="application/pdf"
             />
           </div>
 
           <span className={styles.or}>{t('Form.form.or')}</span>
-          <label htmlFor="resumeLink" className={styles.visuallyHidden}>
+          <label htmlFor="resumeLink" className={styles.visually_hidden}>
             {t('Form.form.resumeLink')}
           </label>
           <input
