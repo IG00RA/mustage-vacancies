@@ -1,6 +1,6 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import styles from './Header.module.css';
@@ -10,7 +10,8 @@ import { useEffect, useState } from 'react';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { menuItems } from '@/data/data';
 
-export default function Header({ locale }: { locale: string }) {
+export default function Header() {
+  const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
   const [query, setQuery] = useState<URLSearchParams | null>(null);

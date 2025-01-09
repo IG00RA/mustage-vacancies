@@ -145,7 +145,7 @@ export default function Form() {
   };
 
   return (
-    <section className={styles.form}>
+    <section id="contacts" className={styles.form}>
       <div className={styles.container}>
         <div className={styles.text_wrap}>
           <h2 className={styles.header}>{t('Form.header')}</h2>

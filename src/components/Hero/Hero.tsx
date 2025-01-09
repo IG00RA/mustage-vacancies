@@ -49,7 +49,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section className={styles.hero}>
+    <section id="hero" className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.header_wrap}>
           <Image

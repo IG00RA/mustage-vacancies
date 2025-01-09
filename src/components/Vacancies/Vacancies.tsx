@@ -25,7 +25,7 @@ export default function Vacancies() {
   }
 
   return (
-    <section className={styles.vacancies}>
+    <section id="vacancies" className={styles.vacancies}>
       <div className={styles.container}>
         <h2 className={styles.header}>
           <span>{t('Vacancies.header.first')}</span>

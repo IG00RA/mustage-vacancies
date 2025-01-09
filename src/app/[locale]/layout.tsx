@@ -9,7 +9,6 @@ import { getMessages } from 'next-intl/server';
 import { Suspense } from 'react';
 import { FacebookPixel } from '@/components/FacebookPixel/FacebookPixel';
 import { ToastContainer } from 'react-toastify';
-import Header from '@/components/Header/Header';
 
 const montserrat = Montserrat({
   subsets: ['latin'],
@@ -92,7 +91,6 @@ export default async function RootLayout({
     <html lang={locale}>
       <NextIntlClientProvider messages={messages}>
         <body className={`${montserrat.variable} ${ukraine.variable}`}>
-          <Header locale={locale} />
           {children}
           <ToastContainer />
           <Suspense fallback={null}>
