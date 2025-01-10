@@ -12,29 +12,29 @@ export default function Confirm({ locale }: { locale: string }) {
   const t = useTranslations();
   const CHAT_URL = process.env.NEXT_PUBLIC_CHAT_URL || '';
 
-  const handleSubmit = async () => {
-    try {
-      const message = {
-        bot: true,
-        message: 'Користувача перенаправлено в бот',
-      };
-      await Promise.all([sendToGoogleScript(message), sendMessage(message)]);
-      window.location.href = CHAT_URL;
-    } catch (error) {
-      if (error instanceof Error) {
-        toast.error(`${t('Form.errors.sendError')} ${error.message}`);
-      } else {
-        toast.error(t('Form.errors.sendError'));
-      }
-    }
-  };
+  // const handleSubmit = async () => {
+  //   try {
+  //     const message = {
+  //       bot: true,
+  //       message: 'Користувача перенаправлено в бот',
+  //     };
+  //     await Promise.all([sendToGoogleScript(message), sendMessage(message)]);
+  //     window.location.href = CHAT_URL;
+  //   } catch (error) {
+  //     if (error instanceof Error) {
+  //       toast.error(`${t('Form.errors.sendError')} ${error.message}`);
+  //     } else {
+  //       toast.error(t('Form.errors.sendError'));
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      handleSubmit();
-    }, 5000);
-    return () => clearTimeout(timer);
-  }, []);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     handleSubmit();
+  //   }, 5000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <section className={styles.confirm}>

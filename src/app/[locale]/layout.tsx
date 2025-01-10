@@ -95,7 +95,8 @@ export default async function RootLayout({
           <ToastContainer />
           <Suspense fallback={null}>
             <FacebookPixel locale={locale} />
-          </Suspense>
+          </Suspense>{' '}
+          <div id="__next"></div>
         </body>
       </NextIntlClientProvider>
     </html>

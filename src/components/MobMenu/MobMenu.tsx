@@ -67,6 +67,7 @@ export default function MobMenu({
 
         <div className={styles.lang_wrap}>
           <LanguageSwitcher
+            headerStyle={false}
             locale={locale}
             handleLanguageChange={handleLanguageChange}
           />

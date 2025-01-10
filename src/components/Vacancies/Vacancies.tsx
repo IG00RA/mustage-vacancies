@@ -19,9 +19,7 @@ export default function Vacancies() {
   }, [locale]);
 
   if (error) {
-    return (
-      <p className={styles.error}>Error loading vacancies: {error.message}</p>
-    );
+    return <p className={styles.description}>Error loading vacancies...</p>;
   }
 
   return (
@@ -41,13 +39,16 @@ export default function Vacancies() {
             <li key={vacancy.id} className={styles.item}>
               <div className={styles.title_wrap}>
                 <h3 className={styles.title}>{vacancy.Title}</h3>
-                <Link href={`/${vacancy.id}`} className={styles.link}>
+                <Link
+                  href={`/${locale}/${vacancy.documentId}`}
+                  className={styles.link}
+                >
                   <Icon name="icon-arrow" width={16} height={16} />
                 </Link>
               </div>
               <p className={styles.description}>{vacancy.Description}</p>
               <div className={styles.skills}>
-                {vacancy.Skills.map(skill => (
+                {vacancy?.Skills?.map(skill => (
                   <span key={skill.id} className={styles.skill}>
                     {skill.Skill}
                   </span>
