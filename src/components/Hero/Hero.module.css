@@ -18,7 +18,7 @@
   margin: 0 auto;
   padding: 107px 20px 20px;
   background-image: url('../../img/hero/back_mob.webp');
-  background-position: top 23% right -8px;
+  background-position: top 24% right -8px;
   background-repeat: no-repeat;
   background-size: 302px 286px;
 
@@ -134,7 +134,7 @@
   font-size: var(--fs_large);
   font-weight: 400;
   line-height: 1.2;
-  margin-bottom: 160px;
+  margin-bottom: 155px;
   max-width: 350px;
 
   @media (min-width: 560px) {
@@ -156,7 +156,7 @@
 
   @media (min-width: 1328px) {
     font-size: 48px;
-    max-width: 905px;
+    max-width: 900px;
   }
 }
 

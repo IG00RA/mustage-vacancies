@@ -4,14 +4,16 @@ import styles from './LanguageSwitcher.module.css';
 interface LanguageSwitcherProps {
   handleLanguageChange: (language: string) => void;
   locale: string;
+  headerStyle: boolean;
 }
 
 const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
   handleLanguageChange,
+  headerStyle,
   locale,
 }) => {
   return (
-    <div className={styles.language}>
+    <div className={`${styles.language}  ${headerStyle && styles.scroll}`}>
       <Icon name="icon-local" width={24} height={24} />
       <button
         className={`${styles.button} ${

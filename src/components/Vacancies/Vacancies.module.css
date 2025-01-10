@@ -33,6 +33,7 @@
   font-weight: 500;
   line-height: normal;
   margin-bottom: 32px;
+  margin-left: 8px;
 
   & span {
     color: #888fb9;
@@ -128,6 +129,14 @@
   font-weight: 500;
   line-height: 1.2;
   @media (min-width: 350px) {
+    font-size: var(--fs_large);
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 20px;
+  }
+
+  @media (min-width: 1200px) {
     font-size: var(--fs_large);
   }
 }

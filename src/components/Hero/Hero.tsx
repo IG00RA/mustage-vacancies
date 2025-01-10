@@ -11,14 +11,18 @@ import { useTranslations } from 'next-intl';
 import { heroItems as originalGalleryImages } from '@/data/data';
 import logo from '../../img/hero/logo.svg';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 interface HeroItem {
   icon: string;
   text: string;
   link: string;
 }
-export default function Hero() {
+
+interface HeroProps {
+  sectionRef: RefObject<HTMLElement>;
+}
+export default function Hero({ sectionRef }: HeroProps) {
   const t = useTranslations();
   const [groupedItems, setGroupedItems] = useState<HeroItem[][]>([]);
 
@@ -49,7 +53,7 @@ export default function Hero() {
   }, []);
 
   return (
-    <section id="hero" className={styles.hero}>
+    <section ref={sectionRef} className={styles.hero}>
       <div className={styles.container}>
         <div className={styles.header_wrap}>
           <Image

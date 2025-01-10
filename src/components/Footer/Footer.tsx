@@ -50,6 +50,7 @@ export default function Footer() {
           </nav>
           <div className={styles.lang_wrap}>
             <LanguageSwitcher
+              headerStyle={false}
               locale={locale}
               handleLanguageChange={handleLanguageChange}
             />

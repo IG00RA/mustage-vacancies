@@ -10,7 +10,11 @@ import { useEffect, useState } from 'react';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { menuItems } from '@/data/data';
 
-export default function Header() {
+interface HeaderProps {
+  headerStyle: boolean;
+}
+
+export default function Header({ headerStyle }: HeaderProps) {
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -52,10 +56,16 @@ export default function Header() {
         closeMenu={closeMenu}
       />
       <header
-        className={`${styles.header} ${isMenuOpen && styles.mobile_menu_open}`}
+        className={`${styles.header} ${isMenuOpen && styles.mobile_menu_open} ${
+          headerStyle && styles.scroll
+        }`}
       >
         <Link className={styles.logo_wrap} href={`/${locale}/?${query}`}>
-          <Icon name="icon-header_logo" width={40} height={33} />
+          {!headerStyle ? (
+            <Icon name="icon-header_logo" width={40} height={33} />
+          ) : (
+            <Icon name="icon-logo_dark" width={40} height={33} />
+          )}
           <span className={styles.logo_text}>{t('Header.home')}</span>
         </Link>
         <nav className={styles.nav}>
@@ -71,6 +81,7 @@ export default function Header() {
         </nav>
         <div className={styles.lang_wrap}>
           <LanguageSwitcher
+            headerStyle={headerStyle}
             locale={locale}
             handleLanguageChange={handleLanguageChange}
           />

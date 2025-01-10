@@ -1,7 +1,7 @@
 .offer {
   margin: 0 auto;
   width: var(--container);
-  padding-bottom: 40px;
+  padding-bottom: 96px;
 
   @media (min-width: 768px) {
     padding-bottom: 60px;
@@ -84,8 +84,8 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 323px;
+  transform: translate(-49%, -50%);
+  width: 346px;
   height: 332px;
   background-image: url('../../img/offer/chair_mob.webp');
   background-repeat: no-repeat;
@@ -242,7 +242,7 @@
 .list_item {
   position: relative;
   display: flex;
-  padding: 12px 24px;
+  padding: 11px 24px;
   align-items: center;
   gap: 12px;
   border-radius: 100px;
@@ -338,14 +338,16 @@
 .list_icon_hover {
   position: absolute;
   top: 50%;
-  left: 32px;
+  left: 24px;
   transform: translateY(-50%);
   flex-shrink: 0;
   width: 24px;
   height: 24px;
   opacity: 0;
   transition: opacity 0.3s ease;
+
   @media (min-width: 1024px) {
+    left: 32px;
     width: 32px;
     height: 32px;
     & svg {

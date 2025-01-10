@@ -27,6 +27,26 @@
   }
 }
 
+.scroll {
+  .logo_text {
+    color: var(--main_color);
+  }
+  .nav_item {
+    color: var(--main_color);
+
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  }
+  .burger_wrap {
+    background-color: #fff;
+  }
+  .line {
+    background-color: var(--main_color);
+  }
+}
+
 .logo_wrap {
   display: flex;
   align-items: center;
