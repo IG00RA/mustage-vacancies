@@ -16,6 +16,9 @@
 # production
 /build
 
+# keys
+/private
+
 # misc
 .DS_Store
 *.pem

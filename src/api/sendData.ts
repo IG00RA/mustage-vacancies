@@ -5,8 +5,13 @@ interface FormData {
   message: string;
   name?: string;
   username?: string;
-  phone?: string;
-  bot?: boolean;
+  comment?: string;
+  resumeLink?: string;
+}
+
+interface SendMessageData {
+  type: string;
+  formData: FormData;
 }
 
 interface QueryParams {
@@ -82,23 +87,37 @@ const sendPostRequest = async (
   }
 };
 
-export const sendToGoogleScript = async (data: FormData): Promise<void> => {
-  const requestData = { ...data, url, ...getQueryParams() };
+export const sendToGoogleScript = async (
+  data: SendMessageData
+): Promise<void> => {
+  const requestData = {
+    ...data,
+    formData: {
+      ...data.formData,
+      url,
+      ...getQueryParams(),
+    },
+  };
   await sendPostRequest('/api/send-to-google-script', requestData);
 };
 
-export const sendMessage = async (sendData: FormData): Promise<void> => {
-  const baseMessage = sendData.bot
-    ? '<b>Користувач перейшов в бот:</b>'
-    : `<b>Користувач відправив форму:</b>\nФІО: <b>${
-        sendData.name || ''
-      }</b>\nТелефон: <b>${sendData.phone || ''}</b>\nTg username: <b>${
-        sendData.username || ''
-      }</b>`;
+export const sendMessage = async (sendData: SendMessageData): Promise<void> => {
+  let botMessage;
+  botMessage = '<b>Користувач відправив форму:</b>\n';
+  botMessage += 'Імя: <b>' + sendData.formData.name + '</b>\n';
+  botMessage += 'Telegram: <b>' + sendData.formData.username + '</b>\n';
+  botMessage += 'Коментар: <b>' + sendData.formData.comment + '</b>\n';
+  botMessage += 'Резюме: <b>' + sendData.formData.resumeLink + '</b>\n';
 
-  const message = `${baseMessage}\nUrl: <b>${url}</b>\n${getParamString(
-    getQueryParams()
-  )}`;
+  botMessage += 'Url: <b>' + url + '</b>\n';
+
+  const params = getQueryParams();
+  botMessage += getParamString(params);
+
+  const message = {
+    type: 'vacancy',
+    formData: botMessage,
+  };
 
   await sendPostRequest('/api/send-message', { message });
 };

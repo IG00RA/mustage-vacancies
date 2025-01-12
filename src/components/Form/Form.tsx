@@ -2,32 +2,29 @@
 
 import Icon from '@/helpers/Icon';
 import styles from './Form.module.css';
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { ChangeEvent, FormEvent, useState, MouseEvent } from 'react';
 import { toast } from 'react-toastify';
-import { useRouter } from 'next/navigation';
 import { sendMessage, sendToGoogleScript } from '@/api/sendData';
 import { useRef } from 'react';
 
 export default function Form() {
   const t = useTranslations();
-  const locale = useLocale();
-  const router = useRouter();
-  const nicknameRegex = /^@([a-zA-Z0-9_]{3,32})$/;
 
   const [isLoading, setIsLoading] = useState(false);
 
-  const [formData, setFormData] = useState({
+  const initialFormData = {
     name: '',
     nickname: '',
     comment: '',
     resumeLink: '',
     resumeFile: null as File | null,
-  });
+  };
+
+  const [formData, setFormData] = useState(initialFormData);
 
   const [errors, setErrors] = useState({
     name: '',
-    nickname: '',
     resumeLink: '',
     resumeFile: '',
   });
@@ -49,12 +46,15 @@ export default function Form() {
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>): void => {
     const file = e.target.files?.[0] || null;
     setFormData({ ...formData, resumeFile: file });
-    setErrors({ ...errors, resumeFile: '' });
+    setErrors({ ...errors, resumeLink: '', resumeFile: '' });
   };
 
   const handleFileClose = (e: MouseEvent<HTMLSpanElement>): void => {
     e.stopPropagation();
     setFormData({ ...formData, resumeFile: null });
+    if (hiddenFileInputRef.current) {
+      hiddenFileInputRef.current.value = '';
+    }
   };
 
   const validateForm = (): boolean => {
@@ -71,14 +71,6 @@ export default function Form() {
       isValid = false;
     } else if (formData.name.length > 100) {
       newErrors.name = t('Form.errors.nameLength');
-      isValid = false;
-    }
-
-    if (!formData.nickname) {
-      newErrors.nickname = t('Form.errors.required');
-      isValid = false;
-    } else if (!nicknameRegex.test(formData.nickname)) {
-      newErrors.nickname = t('Form.errors.nickFormat');
       isValid = false;
     }
 
@@ -102,6 +94,23 @@ export default function Form() {
     return isValid;
   };
 
+  const uploadFile = async (file: File) => {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error('Error uploading file');
+    }
+
+    const data = await response.json();
+    return data.fileId;
+  };
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     if (!validateForm()) {
@@ -111,32 +120,34 @@ export default function Form() {
 
     try {
       const message = {
-        message: 'Користувач відправив форму',
-        name: formData.name,
-        username: formData.nickname,
-        comment: formData.comment,
-        resumeLink: formData.resumeLink,
-        bot: false,
+        type: 'vacancy',
+        formData: {
+          message: 'Користувач відправив форму',
+          name: formData.name,
+          username: formData.nickname,
+          comment: formData.comment,
+          resumeLink: formData.resumeLink,
+        },
       };
 
       const fileData = formData.resumeFile;
-
       setIsLoading(true);
-      await Promise.all([sendToGoogleScript(message), sendMessage(message)]);
 
-      if (fileData) {
-        const formDataToSend = new FormData();
-        formDataToSend.append('resume', fileData);
+      const fileId = fileData ? await uploadFile(fileData) : null;
+
+      if (fileId) {
+        message.formData.resumeLink = `https://drive.google.com/file/d/${fileId}/view`;
       }
+
+      await Promise.all([sendToGoogleScript(message), sendMessage(message)]);
 
       toast.success(t('Form.form.ok'));
 
-      const currentQueryParams = new URLSearchParams(window.location.search);
-      const queryParams = currentQueryParams.toString();
-
-      router.push(
-        queryParams ? `/${locale}/confirm?${queryParams}` : `/${locale}/confirm`
-      );
+      setFormData(initialFormData);
+      setErrors({ name: '', resumeLink: '', resumeFile: '' });
+      if (hiddenFileInputRef.current) {
+        hiddenFileInputRef.current.value = '';
+      }
     } catch {
       toast.error(t('Form.errors.sendError'));
     } finally {
@@ -174,12 +185,8 @@ export default function Form() {
             value={formData.nickname}
             onChange={handleChange}
             placeholder={t('Form.form.nickPlaceHolder')}
-            className={`${styles.input} ${errors.nickname ? styles.error : ''}`}
+            className={`${styles.input}`}
           />
-          {errors.nickname && (
-            <p className={styles.error_text}>{errors.nickname}</p>
-          )}
-
           <label htmlFor="comment" className={styles.visually_hidden}>
             {t('Form.form.content')}
           </label>
@@ -188,9 +195,7 @@ export default function Form() {
             value={formData.comment}
             onChange={handleChange}
             placeholder={t('Form.form.contentPlaceHolder')}
-            className={`${styles.input} ${styles.textarea} ${
-              errors.name ? styles.error : ''
-            }`}
+            className={`${styles.input} ${styles.textarea} `}
           ></textarea>
 
           <span className={styles.resume_text}>{t('Form.form.resume')}</span>

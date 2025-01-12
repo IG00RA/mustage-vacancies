@@ -19,7 +19,11 @@ export default function Vacancies() {
   }, [locale]);
 
   if (error) {
-    return <p className={styles.description}>Error loading vacancies...</p>;
+    return (
+      <section id="vacancies" className={styles.vacancies}>
+        <p className={styles.description}>{t('Vacancies.error')}</p>
+      </section>
+    );
   }
 
   return (
