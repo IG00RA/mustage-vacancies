@@ -10,7 +10,6 @@ type MobMenuProps = {
   isMenuOpen: boolean;
   closeMenu: () => void;
   locale: string;
-  handleLanguageChange: (lang: string) => void;
 };
 
 export default function MobMenu({
@@ -18,7 +17,6 @@ export default function MobMenu({
   query,
   closeMenu,
   locale,
-  handleLanguageChange,
 }: MobMenuProps) {
   const t = useTranslations('');
 
@@ -68,8 +66,6 @@ export default function MobMenu({
         <div className={styles.lang_wrap}>
           <LanguageSwitcher
             headerStyle={false}
-            locale={locale}
-            handleLanguageChange={handleLanguageChange}
           />
         </div>
         <ul className={styles.social}>

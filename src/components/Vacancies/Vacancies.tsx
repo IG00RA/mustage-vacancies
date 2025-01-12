@@ -1,18 +1,25 @@
 'use client';
 
 import styles from './Vacancies.module.css';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import { fetchVacancies, Vacancy } from '../../api/vacancies';
 import Icon from '@/helpers/Icon';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Vacancies() {
   const t = useTranslations();
+  const pathname = usePathname();
   const [vacancies, setVacancies] = useState<Vacancy[]>([]);
   const [error, setError] = useState<Error | null>(null);
 
-  const locale = useLocale();
+  const getLocaleFromPath = (pathname: string): string => {
+    const pathSegments = pathname.split('/');
+    return pathSegments[1] || 'uk';
+  };
+
+  const locale = getLocaleFromPath(pathname || '');
 
   useEffect(() => {
     fetchVacancies(locale).then(setVacancies).catch(setError);

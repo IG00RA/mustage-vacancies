@@ -1,10 +1,10 @@
 'use client';
 
-import { useLocale, useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import styles from './VacancyPage.module.css';
 import { useEffect, useState } from 'react';
 import { Vacancy, fetchVacancyById } from '@/api/vacancies';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Icon from '@/helpers/Icon';
 import Modal from 'react-modal';
@@ -15,8 +15,8 @@ if (typeof window !== 'undefined') {
 }
 
 export default function VacancyPage() {
-  const locale = useLocale();
   const params = useParams();
+  const pathname = usePathname();
   const [vacancy, setVacancies] = useState<Vacancy>(Object);
   const [error, setError] = useState<Error | null>(null);
   const [query, setQuery] = useState<URLSearchParams | null>(null);
@@ -24,6 +24,13 @@ export default function VacancyPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   const t = useTranslations('');
+
+  const getLocaleFromPath = (pathname: string): string => {
+    const pathSegments = pathname.split('/');
+    return pathSegments[1] || 'uk';
+  };
+
+  const locale = getLocaleFromPath(pathname || '');
 
   useEffect(() => {
     const id = params?.id as string;

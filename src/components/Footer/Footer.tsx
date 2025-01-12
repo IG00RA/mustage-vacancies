@@ -2,20 +2,17 @@
 
 import Icon from '@/helpers/Icon';
 import styles from './Footer.module.css';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import { menuItems, socialItems } from '@/data/data';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { useEffect, useState } from 'react';
 
 export default function Footer() {
   const t = useTranslations();
-  const locale = useLocale();
-  const [query, setQuery] = useState<URLSearchParams | null>(null);
-
   const pathname = usePathname();
-  const router = useRouter();
+  const [query, setQuery] = useState<URLSearchParams | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -24,10 +21,12 @@ export default function Footer() {
     }
   }, []);
 
-  const handleLanguageChange = (lang: string) => {
-    const path = pathname.split('/').slice(2).join('/');
-    router.push(`/${lang}/${path}?${query}`);
+  const getLocaleFromPath = (pathname: string): string => {
+    const pathSegments = pathname.split('/');
+    return pathSegments[1] || 'uk';
   };
+
+  const locale = getLocaleFromPath(pathname || '');
 
   return (
     <footer className={styles.footer}>
@@ -49,11 +48,7 @@ export default function Footer() {
             </ul>
           </nav>
           <div className={styles.lang_wrap}>
-            <LanguageSwitcher
-              headerStyle={false}
-              locale={locale}
-              handleLanguageChange={handleLanguageChange}
-            />
+            <LanguageSwitcher headerStyle={false} />
           </div>
           <ul className={styles.social}>
             {socialItems.map((item, index) => (

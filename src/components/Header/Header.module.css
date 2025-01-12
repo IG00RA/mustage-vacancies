@@ -19,9 +19,6 @@
     border-radius: 100px;
   }
 
-  @media (min-width: 1328px) {
-  }
-
   @media (min-width: 1408px) {
     max-width: var(--desktop);
   }

@@ -1,24 +1,22 @@
 'use client';
 
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
 import styles from './Header.module.css';
 import Icon from '@/helpers/Icon';
 import MobMenu from '../MobMenu/MobMenu';
 import { useEffect, useState } from 'react';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 import { menuItems } from '@/data/data';
+import { usePathname } from 'next/navigation';
 
 interface HeaderProps {
   headerStyle: boolean;
 }
 
 export default function Header({ headerStyle }: HeaderProps) {
-  const locale = useLocale();
-  const pathname = usePathname();
-  const router = useRouter();
   const [query, setQuery] = useState<URLSearchParams | null>(null);
+  const pathname = usePathname();
 
   const t = useTranslations('');
 
@@ -31,11 +29,6 @@ export default function Header({ headerStyle }: HeaderProps) {
     }
   }, []);
 
-  const handleLanguageChange = (lang: string) => {
-    const path = pathname.split('/').slice(2).join('/');
-    router.push(`/${lang}/${path}?${query}`);
-  };
-
   const closeMenu = () => {
     setIsMenuOpen(false);
     document.body.style.overflow = 'auto';
@@ -46,14 +39,21 @@ export default function Header({ headerStyle }: HeaderProps) {
     document.body.style.overflow = 'hidden';
     document.body.style.touchAction = 'none';
   };
+
+  
+  const getLocaleFromPath = (pathname: string): string => {
+    const pathSegments = pathname.split('/');
+    return pathSegments[1] || 'uk';
+  };
+
+  const locale = getLocaleFromPath(pathname || '');
   return (
     <>
       <MobMenu
         query={query}
-        locale={locale}
-        handleLanguageChange={handleLanguageChange}
         isMenuOpen={isMenuOpen}
         closeMenu={closeMenu}
+        locale={locale}
       />
       <header
         className={`${styles.header} ${isMenuOpen && styles.mobile_menu_open} ${
@@ -80,11 +80,7 @@ export default function Header({ headerStyle }: HeaderProps) {
           </ul>
         </nav>
         <div className={styles.lang_wrap}>
-          <LanguageSwitcher
-            headerStyle={headerStyle}
-            locale={locale}
-            handleLanguageChange={handleLanguageChange}
-          />
+          <LanguageSwitcher headerStyle={headerStyle} />
         </div>
         <div
           className={`${styles.burger_wrap} ${
