@@ -8,7 +8,7 @@ import { useParams, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import Icon from '@/helpers/Icon';
 import Modal from 'react-modal';
-import Form from '../Form/Form';
+import FormModal from '../FormModal/FormModal';
 
 if (typeof window !== 'undefined') {
   Modal.setAppElement('#__next');
@@ -163,8 +163,14 @@ export default function VacancyPage() {
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
-        <button onClick={closeModal}>Close Modal</button>
-        <Form />
+        <button
+          className={styles.close_button}
+          type="button"
+          onClick={closeModal}
+        >
+          <Icon name="icon-close_modal" width={24} height={24} />
+        </button>
+        <FormModal />
       </Modal>
     </section>
   );
