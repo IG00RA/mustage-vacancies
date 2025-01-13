@@ -12,12 +12,13 @@ import { useEffect, useState } from 'react';
 export default function Footer() {
   const t = useTranslations();
   const pathname = usePathname();
-  const [query, setQuery] = useState<URLSearchParams | null>(null);
+  const [query, setQuery] = useState<string>('');
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlSearchParams = new URLSearchParams(window.location.search);
-      setQuery(urlSearchParams);
+      const queryString = urlSearchParams.toString();
+      setQuery(queryString ? `?${queryString}` : '');
     }
   }, []);
 
@@ -32,7 +33,7 @@ export default function Footer() {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.menu_wrap}>
-          <Link className={styles.logo_wrap} href={`/${locale}/?${query}`}>
+          <Link className={styles.logo_wrap} href={`/${locale}/${query}`}>
             <Icon name="icon-header_logo" width={40} height={33} />
             <span className={styles.logo_text}>{t('Header.home')}</span>
           </Link>

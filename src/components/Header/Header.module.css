@@ -78,7 +78,7 @@
   }
 }
 
-@media (max-width: 767px) {
+@media (max-width: 849px) {
   .nav {
     display: none;
   }
@@ -129,7 +129,7 @@
   justify-content: center;
   align-items: center;
 
-  @media (min-width: 768px) {
+  @media (min-width: 850px) {
     display: none;
   }
 }

@@ -6,7 +6,7 @@ import Link from 'next/link';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 type MobMenuProps = {
-  query: URLSearchParams | null;
+  query: string | '';
   isMenuOpen: boolean;
   closeMenu: () => void;
   locale: string;
@@ -32,7 +32,7 @@ export default function MobMenu({
         onClick={event => event.stopPropagation()}
       >
         <div className={styles.head_wrapper}>
-          <Link className={styles.logo_wrap} href={`/${locale}/?${query}`}>
+          <Link className={styles.logo_wrap} href={`/${locale}/${query}`}>
             <Icon name="icon-header_logo" width={40} height={33} />
             <span className={styles.logo_text}>{t('Header.home')}</span>
           </Link>
@@ -64,9 +64,7 @@ export default function MobMenu({
         </nav>
 
         <div className={styles.lang_wrap}>
-          <LanguageSwitcher
-            headerStyle={false}
-          />
+          <LanguageSwitcher headerStyle={false} />
         </div>
         <ul className={styles.social}>
           {socialItems.map((item, index) => (

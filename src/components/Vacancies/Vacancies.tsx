@@ -12,6 +12,7 @@ export default function Vacancies() {
   const [vacancies, setVacancies] = useState<Vacancy[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [query, setQuery] = useState<string>('');
 
   const getLocaleFromPath = (pathname: string): string => {
     const pathSegments = pathname.split('/');
@@ -19,6 +20,14 @@ export default function Vacancies() {
   };
 
   const locale = getLocaleFromPath(pathname || '');
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlSearchParams = new URLSearchParams(window.location.search);
+      const queryString = urlSearchParams.toString();
+      setQuery(queryString ? `?${queryString}` : '');
+    }
+  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -75,7 +84,7 @@ export default function Vacancies() {
               <div className={styles.title_wrap}>
                 <h3 className={styles.title}>{vacancy.Title}</h3>
                 <Link
-                  href={`/${locale}/${vacancy.documentId}`}
+                  href={`/${locale}/${vacancy.documentId}/${query}`}
                   className={styles.link}
                 >
                   <Icon name="icon-arrow" width={16} height={16} />

@@ -14,8 +14,8 @@ interface HeaderProps {
   headerStyle: boolean;
 }
 
-export default function Header({ headerStyle }: HeaderProps) {
-  const [query, setQuery] = useState<URLSearchParams | null>(null);
+export default function Header({ headerStyle = false }: HeaderProps) {
+  const [query, setQuery] = useState<string>('');
   const pathname = usePathname();
 
   const t = useTranslations('');
@@ -25,7 +25,8 @@ export default function Header({ headerStyle }: HeaderProps) {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlSearchParams = new URLSearchParams(window.location.search);
-      setQuery(urlSearchParams);
+      const queryString = urlSearchParams.toString();
+      setQuery(queryString ? `?${queryString}` : '');
     }
   }, []);
 
@@ -40,13 +41,13 @@ export default function Header({ headerStyle }: HeaderProps) {
     document.body.style.touchAction = 'none';
   };
 
-  
   const getLocaleFromPath = (pathname: string): string => {
     const pathSegments = pathname.split('/');
     return pathSegments[1] || 'uk';
   };
 
   const locale = getLocaleFromPath(pathname || '');
+
   return (
     <>
       <MobMenu
@@ -60,7 +61,7 @@ export default function Header({ headerStyle }: HeaderProps) {
           headerStyle && styles.scroll
         }`}
       >
-        <Link className={styles.logo_wrap} href={`/${locale}/?${query}`}>
+        <Link className={styles.logo_wrap} href={`/${locale}/${query}`}>
           {!headerStyle ? (
             <Icon name="icon-header_logo" width={40} height={33} />
           ) : (
@@ -72,7 +73,10 @@ export default function Header({ headerStyle }: HeaderProps) {
           <ul className={styles.nav_list}>
             {menuItems.map((item, index) => (
               <li key={index}>
-                <Link className={styles.nav_item} href={item.href}>
+                <Link
+                  className={styles.nav_item}
+                  href={`/${locale}/${query}${item.href}`}
+                >
                   {t(item.label)}
                 </Link>
               </li>

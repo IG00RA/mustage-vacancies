@@ -73,7 +73,10 @@
     margin-top: 10px;
     & ul {
       display: flex;
-      gap: 40px;
+      gap: 18px;
+      @media (min-width: 1024px) {
+        gap: 40px;
+      }
     }
   }
 }

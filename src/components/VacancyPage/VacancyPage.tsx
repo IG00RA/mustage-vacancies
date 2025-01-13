@@ -19,7 +19,7 @@ export default function VacancyPage() {
   const pathname = usePathname();
   const [vacancy, setVacancies] = useState<Vacancy>(Object);
   const [error, setError] = useState<Error | null>(null);
-  const [query, setQuery] = useState<URLSearchParams | null>(null);
+  const [query, setQuery] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -51,7 +51,8 @@ export default function VacancyPage() {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const urlSearchParams = new URLSearchParams(window.location.search);
-      setQuery(urlSearchParams);
+      const queryString = urlSearchParams.toString();
+      setQuery(queryString ? `?${queryString}` : '');
     }
   }, []);
 
@@ -69,7 +70,7 @@ export default function VacancyPage() {
   if (loading) {
     return (
       <section className={styles.vacancy}>
-        <Link className={styles.link_wrap} href={`/${locale}/?${query}`}>
+        <Link className={styles.link_wrap} href={`/${locale}/${query}`}>
           <Icon name="icon-back" width={24} height={24} />
           <span className={styles.link_text}>{t('Page.back')}</span>
         </Link>
@@ -85,7 +86,7 @@ export default function VacancyPage() {
   if (error) {
     return (
       <section className={styles.vacancy}>
-        <Link className={styles.link_wrap} href={`/${locale}/?${query}`}>
+        <Link className={styles.link_wrap} href={`/${locale}/${query}`}>
           <Icon name="icon-back" width={24} height={24} />
           <span className={styles.link_text}>{t('Page.back')}</span>
         </Link>
@@ -96,7 +97,7 @@ export default function VacancyPage() {
 
   return (
     <section className={styles.vacancy}>
-      <Link className={styles.link_wrap} href={`/${locale}/?${query}`}>
+      <Link className={styles.link_wrap} href={`/${locale}/${query}`}>
         <Icon name="icon-back" width={24} height={24} />
         <span className={styles.link_text}>{t('Page.back')}</span>
       </Link>
