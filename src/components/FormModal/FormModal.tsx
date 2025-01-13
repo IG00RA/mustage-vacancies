@@ -8,7 +8,11 @@ import { toast } from 'react-toastify';
 import { sendMessage, sendToGoogleScript } from '@/api/sendData';
 import { useRef } from 'react';
 
-export default function FormModal() {
+type FormModalProps = {
+  closeModal: () => void;
+};
+
+export default function FormModal({ closeModal }: FormModalProps) {
   const t = useTranslations();
 
   const [isLoading, setIsLoading] = useState(false);
@@ -157,6 +161,13 @@ export default function FormModal() {
 
   return (
     <section id="contacts" className={styles.form}>
+      <button
+        className={styles.close_button}
+        type="button"
+        onClick={closeModal}
+      >
+        <Icon name="icon-close_modal" width={24} height={24} />
+      </button>
       <div className={styles.text_wrap}>
         <h2 className={styles.header}>{t('Form.headerPage')}</h2>
         <h4 className={styles.header_text}>{t('Form.headerPageText')}</h4>
@@ -267,7 +278,6 @@ export default function FormModal() {
             <div className={styles.question_link_icon_hover}>
               <Icon name="icon-google_hov" width={32} height={32} />
             </div>
-            <span className={styles.question_link_text}>E-mail</span>
           </a>
           <a
             className={`${styles.question_link} ${styles.question_link_tg}`}
@@ -281,11 +291,6 @@ export default function FormModal() {
             <div className={styles.question_link_icon_hover}>
               <Icon name="icon-tg_hov" width={32} height={32} />
             </div>
-            <span
-              className={`${styles.question_link_text} ${styles.question_link_text_tg}`}
-            >
-              Telegram
-            </span>
           </a>
         </div>
       </div>

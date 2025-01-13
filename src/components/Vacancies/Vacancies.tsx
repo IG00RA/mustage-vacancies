@@ -1,5 +1,3 @@
-'use client';
-
 import styles from './Vacancies.module.css';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
@@ -13,6 +11,7 @@ export default function Vacancies() {
   const pathname = usePathname();
   const [vacancies, setVacancies] = useState<Vacancy[]>([]);
   const [error, setError] = useState<Error | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const getLocaleFromPath = (pathname: string): string => {
     const pathSegments = pathname.split('/');
@@ -22,13 +21,38 @@ export default function Vacancies() {
   const locale = getLocaleFromPath(pathname || '');
 
   useEffect(() => {
-    fetchVacancies(locale).then(setVacancies).catch(setError);
+    setLoading(true);
+    fetchVacancies(locale)
+      .then(data => {
+        setVacancies(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err);
+        setLoading(false);
+      });
   }, [locale]);
+
+  if (loading) {
+    return (
+      <section id="vacancies" className={styles.vacancies}>
+        <div className={styles.container}>
+          <div className={styles.dots_loading}>
+            <span className={styles.dot}></span>
+            <span className={styles.dot}></span>
+            <span className={styles.dot}></span>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   if (error) {
     return (
       <section id="vacancies" className={styles.vacancies}>
-        <p className={styles.description}>{t('Vacancies.error')}</p>
+        <div className={styles.container}>
+          <p className={styles.header}>{t('Vacancies.error')}</p>
+        </div>
       </section>
     );
   }

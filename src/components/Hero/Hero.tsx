@@ -38,11 +38,16 @@ export default function Hero({ sectionRef }: HeroProps) {
     const updateGroups = () => {
       const screenWidth = window.innerWidth;
       let groupSize = 4;
-      screenWidth >= 768 && screenWidth <= 1023 && (groupSize = 6);
-      screenWidth >= 1024 && (groupSize = 10);
+
+      if (screenWidth >= 768 && screenWidth <= 1023) {
+        groupSize = 6;
+      } else if (screenWidth >= 1024) {
+        groupSize = 10;
+      }
 
       setGroupedItems(groupItems(originalGalleryImages, groupSize));
     };
+
     updateGroups();
 
     window.addEventListener('resize', updateGroups);

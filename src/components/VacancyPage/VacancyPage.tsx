@@ -20,8 +20,8 @@ export default function VacancyPage() {
   const [vacancy, setVacancies] = useState<Vacancy>(Object);
   const [error, setError] = useState<Error | null>(null);
   const [query, setQuery] = useState<URLSearchParams | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const t = useTranslations('');
 
@@ -35,7 +35,16 @@ export default function VacancyPage() {
   useEffect(() => {
     const id = params?.id as string;
     if (id && (!vacancy || vacancy.documentId !== id)) {
-      fetchVacancyById(id, locale).then(setVacancies).catch(setError);
+      setLoading(true);
+      fetchVacancyById(id, locale)
+        .then(data => {
+          setVacancies(data);
+          setLoading(false);
+        })
+        .catch(err => {
+          setError(err);
+          setLoading(false);
+        });
     }
   }, [locale, params, vacancy]);
 
@@ -56,6 +65,22 @@ export default function VacancyPage() {
     document.body.style.overflow = 'hidden';
     document.body.style.touchAction = 'none';
   };
+
+  if (loading) {
+    return (
+      <section className={styles.vacancy}>
+        <Link className={styles.link_wrap} href={`/${locale}/?${query}`}>
+          <Icon name="icon-back" width={24} height={24} />
+          <span className={styles.link_text}>{t('Page.back')}</span>
+        </Link>
+        <div className={styles.dots_loading}>
+          <span className={styles.dot}></span>
+          <span className={styles.dot}></span>
+          <span className={styles.dot}></span>
+        </div>
+      </section>
+    );
+  }
 
   if (error) {
     return (
@@ -89,14 +114,7 @@ export default function VacancyPage() {
               </span>
             ))}
           </div>
-          <span
-            className={`${styles.loader} ${!isLoading ? styles.hidden : ''}`}
-          ></span>
-          <button
-            onClick={openModal}
-            className={`${isLoading ? styles.hidden : styles.button}`}
-            type="button"
-          >
+          <button onClick={openModal} className={styles.button} type="button">
             {t('Page.button')}
           </button>
           <p className={styles.salary}>{t('Page.salary')}</p>
@@ -163,14 +181,7 @@ export default function VacancyPage() {
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
-        <button
-          className={styles.close_button}
-          type="button"
-          onClick={closeModal}
-        >
-          <Icon name="icon-close_modal" width={24} height={24} />
-        </button>
-        <FormModal />
+        <FormModal closeModal={closeModal} />
       </Modal>
     </section>
   );
