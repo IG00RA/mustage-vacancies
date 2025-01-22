@@ -48,14 +48,13 @@ export interface Vacancy {
 }
 
 const host = process.env.NEXT_PUBLIC_ADMIN_HOST;
-const port = process.env.NEXT_PUBLIC_ADMIN_PORT;
 
 export async function fetchVacancies(locale: string): Promise<Vacancy[]> {
   let lang = locale;
   if (locale === 'uk') {
     lang = 'uk-UA';
   }
-  const url = `http://${host}:${port}/api/vacancies?locale=${lang}&populate=*`;
+  const url = `${host}/api/vacancies?locale=${lang}&populate=*`;
 
   const response = await fetch(url);
 
@@ -75,7 +74,7 @@ export async function fetchVacancyById(
   if (locale === 'uk') {
     lang = 'uk-UA';
   }
-  const url = `http://${host}:${port}/api/vacancies/${id}?locale=${lang}&populate=*`;
+  const url = `${host}/api/vacancies/${id}?locale=${lang}&populate=*`;
 
   const response = await fetch(url);
 
