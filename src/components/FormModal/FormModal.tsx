@@ -124,14 +124,11 @@ export default function FormModal({ closeModal }: FormModalProps) {
 
     try {
       const message = {
-        type: 'vacancy',
-        formData: {
-          message: 'Користувач відправив форму',
-          name: formData.name,
-          username: formData.nickname,
-          comment: formData.comment,
-          resumeLink: formData.resumeLink,
-        },
+        message: 'Користувач відправив форму',
+        name: formData.name,
+        username: formData.nickname,
+        comment: formData.comment,
+        resumeLink: formData.resumeLink,
       };
 
       const fileData = formData.resumeFile;
@@ -140,7 +137,7 @@ export default function FormModal({ closeModal }: FormModalProps) {
       const fileId = fileData ? await uploadFile(fileData) : null;
 
       if (fileId) {
-        message.formData.resumeLink = `https://drive.google.com/file/d/${fileId}/view`;
+        message.resumeLink = `https://drive.google.com/file/d/${fileId}/view`;
       }
 
       await Promise.all([sendToGoogleScript(message), sendMessage(message)]);
