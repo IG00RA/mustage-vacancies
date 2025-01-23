@@ -157,7 +157,7 @@ export default function Form() {
       <div className={styles.container}>
         <div className={styles.text_wrap}>
           <h2 className={styles.header}>{t('Form.header')}</h2>
-          <h4 className={styles.header_text}>{t('Form.headerText')}</h4>
+          <p className={styles.header_text}>{t('Form.headerText')}</p>
         </div>
         <form className={styles.form_wrap} onSubmit={handleSubmit}>
           <label htmlFor="name" className={styles.visually_hidden}>
@@ -165,6 +165,7 @@ export default function Form() {
           </label>
           <input
             type="text"
+            id="name"
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -179,6 +180,7 @@ export default function Form() {
           <input
             type="text"
             name="nickname"
+            id="nickname"
             value={formData.nickname}
             onChange={handleChange}
             placeholder={t('Form.form.nickPlaceHolder')}
@@ -188,6 +190,7 @@ export default function Form() {
             {t('Form.form.content')}
           </label>
           <textarea
+            id="comment"
             name="comment"
             value={formData.comment}
             onChange={handleChange}
@@ -222,6 +225,7 @@ export default function Form() {
             <input
               ref={hiddenFileInputRef}
               type="file"
+              id="resume"
               name="resume"
               onChange={handleFileChange}
               className={styles.hidden}
@@ -235,6 +239,7 @@ export default function Form() {
           </label>
           <input
             type="text"
+            id="resumeLink"
             name="resumeLink"
             value={formData.resumeLink}
             onChange={handleChange}
@@ -261,7 +266,11 @@ export default function Form() {
       <div className={styles.question_wrap}>
         <h3 className={styles.question_text}>{t('Form.questionText')}</h3>
         <div className={styles.question_link_wrap}>
-          <a className={styles.question_link} href="mailto:support@mustage.io">
+          <a
+            className={styles.question_link}
+            href="mailto:mustage.hr@gmail.com"
+            aria-label="Mail"
+          >
             <div className={styles.question_link_icon}>
               <Icon name="icon-google" width={32} height={32} />
             </div>
@@ -272,9 +281,10 @@ export default function Form() {
           </a>
           <a
             className={`${styles.question_link} ${styles.question_link_tg}`}
-            href="https://t.me/usaffiliate"
+            href="https://t.me/mustage_hr"
             target="_blank"
             rel="noopener noreferrer"
+            aria-label="Telegram"
           >
             <div className={styles.question_link_icon}>
               <Icon name="icon-tg" width={32} height={32} />

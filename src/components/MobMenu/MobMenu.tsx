@@ -74,6 +74,7 @@ export default function MobMenu({
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label={item.area}
               >
                 <Icon name={item.icon} width={32} height={32} />
               </a>

@@ -17,6 +17,7 @@ interface HeroItem {
   icon: string;
   text: string;
   link: string;
+  alt: string;
 }
 
 interface HeroProps {
@@ -120,7 +121,7 @@ export default function Hero({ sectionRef }: HeroProps) {
                   >
                     <Image
                       src={item.icon}
-                      alt={item.text}
+                      alt={item.alt}
                       className={styles.icon}
                       width={0}
                       height={0}

@@ -43,58 +43,80 @@ export const menuItems = [
 ];
 
 export const socialItems = [
-  { icon: 'icon-tg_footer', link: 'https://t.me/usaffiliate' },
-  { icon: 'icon-youtube_footer', link: 'https://www.youtube.com/@usaffiliate' },
-  { icon: 'icon-tik_footer', link: 'https://www.tiktok.com/@mustage.io' },
+  {
+    icon: 'icon-tg_footer',
+    area: 'Telegram link',
+    link: 'https://t.me/usaffiliate',
+  },
+  {
+    area: 'Youtube link',
+    icon: 'icon-youtube_footer',
+    link: 'https://www.youtube.com/@usaffiliate',
+  },
+  {
+    area: 'Tik tok link',
+    icon: 'icon-tik_footer',
+    link: 'https://www.tiktok.com/@mustage.io',
+  },
 ];
 
 export const heroItems = [
   {
+    alt: 'Mustage site logo',
     text: 'Про Mustage Team',
     icon: logo_link,
     link: 'https://mustage.site/',
   },
   {
+    alt: 'Mustage Academy logo',
     text: 'Mustage Academy',
     icon: logo_link,
     link: 'https://mustage.site/',
   },
   {
+    alt: 'Logo Youtube',
     text: 'YouTube channel',
     icon: youtube,
     link: 'https://www.youtube.com/@usaffiliate',
   },
   {
+    alt: 'Logo Instagram',
     text: 'Instagram',
     icon: insta,
     link: 'https://www.instagram.com/mustage.team/',
   },
   {
+    alt: 'Logo Tik-Tok',
     text: 'Tik-Tok',
     icon: tik,
     link: 'https://www.tiktok.com/@mustage.io',
   },
   {
+    alt: 'Logo Telegram',
     text: 'Telegram-channel',
     icon: tg_channel,
     link: 'https://t.me/mustage_channel',
   },
   {
+    alt: 'Logo Telegram',
     text: 'Telegram-chat',
     icon: tg_chat,
     link: 'https://t.me/+4oFlq242zzszZmQ6',
   },
   {
+    alt: 'Logo Mustage Store',
     text: 'Mustage Store',
     icon: store,
     link: 'https://mustage.site/',
   },
   {
+    alt: 'Logo Mustage Proxy',
     text: 'Mustage Proxy',
     icon: proxy,
     link: 'https://proxy.mustage.io/',
   },
   {
+    alt: 'Logo Mustage Creo',
     text: 'Mustage Creo',
     icon: creo,
     link: 'https://mustage.io/creo',
