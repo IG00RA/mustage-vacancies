@@ -1,6 +1,3 @@
-import axios from 'axios';
-const host = process.env.NEXT_PUBLIC_ADMIN_HOST;
-
 export interface Skill {
   id: number;
   Skill: string;
@@ -50,6 +47,8 @@ export interface Vacancy {
   localizations?: Localization[];
 }
 
+const host = process.env.NEXT_PUBLIC_ADMIN_HOST;
+
 export async function fetchVacancies(locale: string): Promise<Vacancy[]> {
   let lang = locale;
   if (locale === 'uk') {
@@ -75,26 +74,14 @@ export async function fetchVacancyById(
   if (locale === 'uk') {
     lang = 'uk-UA';
   }
-
   const url = `${host}/api/vacancies/${id}?locale=${lang}&populate=*`;
-  console.log('Fetching URL:', url);
 
-  try {
-    const response = await axios.get(url);
+  const response = await fetch(url);
 
-    console.log('Response data:', response.data);
-    return response.data.data;
-  } catch (error) {
-    console.error('Error fetching vacancy:', error);
-
-    if (axios.isAxiosError(error)) {
-      console.error('Axios error details:', {
-        code: error.code,
-        status: error.response?.status,
-        data: error.response?.data,
-      });
-    }
-
-    throw new Error('Failed to fetch vacancy data.');
+  if (!response.ok) {
+    throw new Error(`Failed to fetch vacancy: ${response.statusText}`);
   }
+
+  const data = await response.json();
+  return data.data;
 }
