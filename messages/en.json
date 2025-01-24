@@ -7,6 +7,7 @@
     "candidate": "You are our ideal candidate if:",
     "responsibilities": "What are the responsibilities?",
     "offer": "What do we offer?",
+    "video": "About the vacancy",
     "error": "No vacancies found",
     "text": "Wait for a message from our manager"
   },
@@ -22,8 +23,8 @@
       "second": "Our Mission"
     },
     "blockText": {
-      "first": " - a young Ukrainian team in the field of digital marketing, developing innovative solutions for our own projects. We have created not just a media space but an entire ecosystem in the affiliate marketing industry.",
-      "second": "- to provide clients with high-quality products and services, and employees with conditions for professional development and stable income."
+      "first": "- a young Ukrainian team in the field of digital marketing, developing innovative solutions for our own projects. We have created not just a media space but an entire ecosystem in the affiliate marketing industry.",
+      "second": "- become №1 in the industry by creating an ecosystem of services and projects that will cover absolutely all possible needs of webmasters and advertisers. Build the best team with the best people and create the best products on the market. We're looking for the best, we're looking for our people."
     }
   },
   "Offer": {
@@ -31,10 +32,12 @@
     "headerText": "By working with us, you will get:",
     "blockHeader": {
       "first": "Flexible 8-hour work schedule",
-      "second": "Full-time employment",
-      "third": "Competitive salary",
-      "fourth": "Opportunities for career growth",
-      "fifth": "We invest in your professional growth (paying for courses, training, and skill enhancement)"
+      "second": "Competitive salary",
+      "third": "Career growth opportunities",
+      "fourth": "Full-time employment",
+      "fifth": "Remote work",
+      "sixth": "Payment in crypto with a link to $",
+      "seventh": "We invest in your professional growth (payment for courses, training, advanced training)"
     },
     "blockText": {
       "first": {

@@ -23,6 +23,7 @@ export default function VacancyPage() {
   const [query, setQuery] = useState<string>('');
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState<boolean>(true);
+  const [showVideo, setShowVideo] = useState(false);
 
   const t = useTranslations('');
 
@@ -66,6 +67,10 @@ export default function VacancyPage() {
     setIsOpen(true);
     document.body.style.overflow = 'hidden';
     document.body.style.touchAction = 'none';
+  };
+
+  const handleShowVideo = () => {
+    setShowVideo(true);
   };
 
   if (loading) {
@@ -124,56 +129,30 @@ export default function VacancyPage() {
           <p className={styles.salary}>{t('Page.salary')}</p>
         </div>
         <div className={styles.description_container_wrap}>
-          <div className={styles.description_container}>
-            <h3 className={styles.description_header}>{t('Page.candidate')}</h3>
-            <ul className={styles.description_list}>
-              {vacancy?.Requirements?.map(requirement => (
-                <li key={requirement.id} className={styles.description_item}>
-                  <Icon name="icon-star" width={16} height={16} />
-                  <p className={styles.description_text}>
-                    {requirement.Requirement}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
+          =
           <div
-            className={`${styles.description_container} ${styles.description_container_second}`}
+            className={`${styles.description_container} ${styles.description_container_fourth}`}
           >
-            <h3 className={styles.description_header}>
-              {t('Page.responsibilities')}
-            </h3>
-            <ul className={styles.description_list}>
-              {vacancy?.Responsibilities?.map(responsibility => (
-                <li
-                  key={responsibility.id}
-                  className={`${styles.description_item} ${styles.description_item_second}`}
-                >
-                  <Icon name="icon-star" width={16} height={16} />
-                  <p className={styles.description_text}>
-                    {responsibility.Responsibility}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div
-            className={`${styles.description_container} ${styles.description_container_third}`}
-          >
-            <h3 className={styles.description_header}>{t('Page.offer')}</h3>
-            <ul className={styles.description_list}>
-              {vacancy?.Advantages?.map(advantage => (
-                <li
-                  key={advantage.id}
-                  className={`${styles.description_item} ${styles.description_item_third}`}
-                >
-                  <Icon name="icon-star" width={16} height={16} />
-                  <p className={styles.description_text}>
-                    {advantage.Advantage}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <h3 className={styles.description_header}>{t('Page.video')}</h3>
+            {!showVideo ? (
+              <button
+                type="button"
+                onClick={handleShowVideo}
+                className={styles.video_icon_wrap}
+              >
+                <Icon name="icon-video" width={56} height={56} />
+              </button>
+            ) : (
+              <iframe
+                width="560"
+                height="315"
+                // src={vacancy.VideoUrl}
+                title="YouTube video player"
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+              ></iframe>
+            )}
           </div>
         </div>
       </div>

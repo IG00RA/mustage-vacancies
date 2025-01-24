@@ -4,7 +4,7 @@
   width: var(--container);
 
   @media (min-width: 1024px) {
-    padding: 135px 0;
+    padding: 135px 0 40px;
   }
 
   @media (min-width: 1408px) {
@@ -199,8 +199,17 @@
   flex-direction: column;
   gap: 16px;
   @media (min-width: 768px) {
+    overflow-y: auto;
     flex: 1;
     gap: 32px;
+  }
+  @media (min-width: 1024px) {
+    max-height: calc(100vh - 260px);
+    min-height: 700px;
+  }
+  @media (min-width: 1200px) {
+    max-height: calc(100vh - 245px);
+    min-height: 650px;
   }
 }
 
@@ -270,6 +279,10 @@
 
 .description_container_third {
   background-color: rgba(26, 117, 255, 0.2);
+}
+
+.description_container_fourth {
+  background-color: #e1e4f2;
 }
 
 .description_item_third {

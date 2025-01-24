@@ -12,6 +12,8 @@ import { heroItems as originalGalleryImages } from '@/data/data';
 import logo from '../../img/hero/logo.svg';
 import Image from 'next/image';
 import { RefObject, useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { Text, fetchData } from '@/api/homeText';
 
 interface HeroItem {
   icon: string;
@@ -25,7 +27,11 @@ interface HeroProps {
 }
 export default function Hero({ sectionRef }: HeroProps) {
   const t = useTranslations();
+  const pathname = usePathname();
   const [groupedItems, setGroupedItems] = useState<HeroItem[][]>([]);
+  const [text, setText] = useState<Text>(Object);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
 
   const groupItems = (items: HeroItem[], groupSize: number): HeroItem[][] => {
     const grouped: HeroItem[][] = [];
@@ -58,6 +64,26 @@ export default function Hero({ sectionRef }: HeroProps) {
     };
   }, []);
 
+  const getLocaleFromPath = (pathname: string): string => {
+    const pathSegments = pathname.split('/');
+    return pathSegments[1] || 'uk';
+  };
+
+  const locale = getLocaleFromPath(pathname || '');
+
+  useEffect(() => {
+    setLoading(true);
+    fetchData(locale)
+      .then(data => {
+        setText(data);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err);
+        setLoading(false);
+      });
+  }, [locale]);
+
   return (
     <section ref={sectionRef} className={styles.hero}>
       <div className={styles.container}>
@@ -77,18 +103,18 @@ export default function Hero({ sectionRef }: HeroProps) {
         <div className={styles.block_wrap}>
           <div className={styles.first_block}>
             <h3 className={styles.first_block_header}>
-              {t('Hero.blocHeader.first')}
+              {text.Hero1stBlockHeader || t('Hero.blocHeader.first')}
             </h3>
             <p className={styles.first_block_text}>
-              {t('Hero.blockText.first')}
+              {text.Hero1stBlock || t('Hero.blockText.first')}
             </p>
           </div>
           <div className={styles.second_block}>
             <h3 className={styles.second_block_header}>
-              {t('Hero.blocHeader.second')}
+              {text.Hero2ndBlockHeader || t('Hero.blocHeader.second')}
             </h3>
             <p className={styles.second_block_text}>
-              {t('Hero.blockText.second')}
+              {text.Hero2dBlock || t('Hero.blockText.second')}
             </p>
           </div>
         </div>
