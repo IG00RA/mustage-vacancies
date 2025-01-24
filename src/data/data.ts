@@ -46,7 +46,7 @@ export const socialItems = [
   {
     icon: 'icon-tg_footer',
     area: 'Telegram link',
-    link: 'https://t.me/usaffiliate',
+    link: 'https://t.me/mustage_hr',
   },
   {
     area: 'Youtube link',
@@ -65,13 +65,13 @@ export const heroItems = [
     alt: 'Mustage site logo',
     text: 'Про Mustage Team',
     icon: logo_link,
-    link: 'https://mustage.site/',
+    link: 'https://www.mustage.team/',
   },
   {
     alt: 'Mustage Academy logo',
     text: 'Mustage Academy',
     icon: logo_link,
-    link: 'https://mustage.site/',
+    link: 'https://mustage.io/course/',
   },
   {
     alt: 'Logo Youtube',

@@ -76,8 +76,10 @@ export async function fetchVacancyById(
   }
   const url = `${host}/api/vacancies/${id}?locale=${lang}&populate=*`;
 
-  const response = await fetch(url);
+  console.log('url', url);
 
+  const response = await fetch(url);
+  console.log('response', response);
   if (!response.ok) {
     throw new Error(`Failed to fetch vacancy: ${response.statusText}`);
   }

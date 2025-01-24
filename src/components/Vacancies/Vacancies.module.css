@@ -96,6 +96,10 @@
     border: 1px solid #1a75ff;
     box-shadow: -10px 0px 24px 0px rgba(26, 117, 255, 0.3),
       10px 0px 24px 0px rgba(29, 249, 144, 0.3);
+
+    & .link {
+      transform: rotate(90deg);
+    }
   }
 }
 
@@ -132,6 +136,7 @@
   align-items: center;
   border-radius: 50%;
   background-color: var(--main_color);
+  transition: transform 0.3s ease;
 }
 
 .title {

@@ -19,8 +19,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       };
     } catch {
       return {
-        title: 'Error',
-        description: 'Failed to load vacancy details.',
+        title: 'Mustage Vacancy',
+        description: 'Explore vacancies on our platform.',
       };
     }
   }
