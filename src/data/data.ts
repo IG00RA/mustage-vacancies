@@ -65,13 +65,13 @@ export const heroItems = [
     alt: 'Mustage site logo',
     text: 'Про Mustage Team',
     icon: logo_link,
-    link: 'https://www.mustage.team/',
+    link: 'https://mustage.team/',
   },
   {
     alt: 'Mustage Academy logo',
     text: 'Mustage Academy',
     icon: logo_link,
-    link: 'https://mustage.io/course/',
+    link: 'https://academy.mustage.team/',
   },
   {
     alt: 'Logo Youtube',
