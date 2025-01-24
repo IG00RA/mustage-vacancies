@@ -9,6 +9,7 @@ import Link from 'next/link';
 import Icon from '@/helpers/Icon';
 import Modal from 'react-modal';
 import FormModal from '../FormModal/FormModal';
+import { marked } from 'marked';
 
 if (typeof window !== 'undefined') {
   Modal.setAppElement('#__next');
@@ -104,10 +105,12 @@ export default function VacancyPage() {
       <div className={styles.main_wrap}>
         <div className={styles.head_container}>
           <h1 className={styles.header}>{vacancy.Title}</h1>
-          <h3 className={styles.description}>{vacancy.DescriptionFull}</h3>
-          <h3 className={styles.description}>
-            {vacancy.DescriptionFullAdditional}
-          </h3>
+          <div
+            className={styles.description}
+            dangerouslySetInnerHTML={{
+              __html: marked(vacancy.DescriptionFull || ''),
+            }}
+          ></div>
           <div className={styles.skills}>
             {vacancy?.Skills?.map(skill => (
               <span key={skill.id} className={styles.skill}>
