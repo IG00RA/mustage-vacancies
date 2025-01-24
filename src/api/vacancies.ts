@@ -77,11 +77,17 @@ export async function fetchVacancyById(
   const url = `${host}/api/vacancies/${id}?locale=${lang}&populate=*`;
 
   console.log('url', url);
+  let response;
+  try {
+    response = await fetch(url);
+    console.log('response', response);
 
-  const response = await fetch(url);
-  console.log('response', response);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch vacancy: ${response.statusText}`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch vacancy: ${response.statusText}`);
+    }
+  } catch (error) {
+    console.error('Error sending data to API: ', error);
+    throw new Error('Error sending data to API: ' + error);
   }
 
   const data = await response.json();
