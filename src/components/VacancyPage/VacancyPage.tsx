@@ -129,82 +129,92 @@ export default function VacancyPage() {
           <p className={styles.salary}>{t('Page.salary')}</p>
         </div>
         <div className={styles.description_container_wrap}>
-          <div className={styles.description_container}>
-            <h3 className={styles.description_header}>{t('Page.candidate')}</h3>
-            <ul className={styles.description_list}>
-              {vacancy?.Requirements?.map(requirement => (
-                <li key={requirement.id} className={styles.description_item}>
-                  <Icon name="icon-star" width={16} height={16} />
-                  <p className={styles.description_text}>
-                    {requirement.Requirement}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div
-            className={`${styles.description_container} ${styles.description_container_second}`}
-          >
-            <h3 className={styles.description_header}>
-              {t('Page.responsibilities')}
-            </h3>
-            <ul className={styles.description_list}>
-              {vacancy?.Responsibilities?.map(responsibility => (
-                <li
-                  key={responsibility.id}
-                  className={`${styles.description_item} ${styles.description_item_second}`}
-                >
-                  <Icon name="icon-star" width={16} height={16} />
-                  <p className={styles.description_text}>
-                    {responsibility.Responsibility}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div
-            className={`${styles.description_container} ${styles.description_container_third}`}
-          >
-            <h3 className={styles.description_header}>{t('Page.offer')}</h3>
-            <ul className={styles.description_list}>
-              {vacancy?.Advantages?.map(advantage => (
-                <li
-                  key={advantage.id}
-                  className={`${styles.description_item} ${styles.description_item_third}`}
-                >
-                  <Icon name="icon-star" width={16} height={16} />
-                  <p className={styles.description_text}>
-                    {advantage.Advantage}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div
-            className={`${styles.description_container} ${styles.description_container_fourth}`}
-          >
-            <h3 className={styles.description_header}>{t('Page.video')}</h3>
-            <div className={styles.video_wrap}>
-              <iframe
-                className={styles.video}
-                src={`https://www.youtube.com/embed/${
-                  vacancy.YouTubeID
-                }?autoplay=${showVideo ? '1' : '0'}&modestbranding=1`}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="YouTube video"
-              />
-              <button
-                type="button"
-                className={`${styles.video_icon} ${
-                  showVideo && styles.video_icon_show
-                }`}
-                onClick={handleShowVideo}
-              >
-                <Icon name="icon-video" width={26} height={26} />
-              </button>
+          {vacancy.Requirements?.length !== 0 && (
+            <div className={styles.description_container}>
+              <h3 className={styles.description_header}>
+                {t('Page.candidate')}
+              </h3>
+              <ul className={styles.description_list}>
+                {vacancy?.Requirements?.map(requirement => (
+                  <li key={requirement.id} className={styles.description_item}>
+                    <Icon name="icon-star" width={16} height={16} />
+                    <p className={styles.description_text}>
+                      {requirement.Requirement}
+                    </p>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
+          )}
+          {vacancy.Responsibilities?.length !== 0 && (
+            <div
+              className={`${styles.description_container} ${styles.description_container_second}`}
+            >
+              <h3 className={styles.description_header}>
+                {t('Page.responsibilities')}
+              </h3>
+              <ul className={styles.description_list}>
+                {vacancy?.Responsibilities?.map(responsibility => (
+                  <li
+                    key={responsibility.id}
+                    className={`${styles.description_item} ${styles.description_item_second}`}
+                  >
+                    <Icon name="icon-star" width={16} height={16} />
+                    <p className={styles.description_text}>
+                      {responsibility.Responsibility}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {vacancy.Advantages?.length !== 0 && (
+            <div
+              className={`${styles.description_container} ${styles.description_container_third}`}
+            >
+              <h3 className={styles.description_header}>{t('Page.offer')}</h3>
+              <ul className={styles.description_list}>
+                {vacancy?.Advantages?.map(advantage => (
+                  <li
+                    key={advantage.id}
+                    className={`${styles.description_item} ${styles.description_item_third}`}
+                  >
+                    <Icon name="icon-star" width={16} height={16} />
+                    <p className={styles.description_text}>
+                      {advantage.Advantage}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {vacancy.YouTubeID && (
+            <div
+              className={`${styles.description_container} ${styles.description_container_fourth}`}
+            >
+              <h3 className={styles.description_header}>{t('Page.video')}</h3>
+              <div className={styles.video_wrap}>
+                <iframe
+                  className={styles.video}
+                  src={`https://www.youtube.com/embed/${
+                    vacancy.YouTubeID
+                  }?autoplay=${showVideo ? '1' : '0'}&modestbranding=1`}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="YouTube video"
+                />
+                <button
+                  type="button"
+                  className={`${styles.video_icon} ${
+                    showVideo && styles.video_icon_show
+                  }`}
+                  onClick={handleShowVideo}
+                >
+                  <Icon name="icon-video" width={26} height={26} />
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

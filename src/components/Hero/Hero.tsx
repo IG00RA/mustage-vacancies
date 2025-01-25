@@ -30,8 +30,6 @@ export default function Hero({ sectionRef }: HeroProps) {
   const pathname = usePathname();
   const [groupedItems, setGroupedItems] = useState<HeroItem[][]>([]);
   const [text, setText] = useState<Text>(Object);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<Error | null>(null);
 
   const groupItems = (items: HeroItem[], groupSize: number): HeroItem[][] => {
     const grouped: HeroItem[][] = [];
@@ -72,16 +70,9 @@ export default function Hero({ sectionRef }: HeroProps) {
   const locale = getLocaleFromPath(pathname || '');
 
   useEffect(() => {
-    setLoading(true);
-    fetchData(locale)
-      .then(data => {
-        setText(data);
-        setLoading(false);
-      })
-      .catch(err => {
-        setError(err);
-        setLoading(false);
-      });
+    fetchData(locale).then(data => {
+      setText(data);
+    });
   }, [locale]);
 
   return (
