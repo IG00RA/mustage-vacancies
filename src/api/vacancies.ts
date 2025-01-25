@@ -33,6 +33,7 @@ export interface Vacancy {
   id: number;
   documentId: string;
   Title: string;
+  YouTubeID?: string;
   Description?: string;
   DescriptionFull?: string;
   DescriptionFullAdditional?: string;
