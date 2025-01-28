@@ -14,6 +14,8 @@ import Image from 'next/image';
 import { RefObject, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Text, fetchData } from '@/api/homeText';
+import Icon from '@/helpers/Icon';
+import MainYoutubeVideo from '../MainYoutubeVideo/MainYoutubeVideo';
 
 interface HeroItem {
   icon: string;
@@ -30,6 +32,7 @@ export default function Hero({ sectionRef }: HeroProps) {
   const pathname = usePathname();
   const [groupedItems, setGroupedItems] = useState<HeroItem[][]>([]);
   const [text, setText] = useState<Text>(Object);
+  const [loading, setLoading] = useState<boolean>(true);
 
   const groupItems = (items: HeroItem[], groupSize: number): HeroItem[][] => {
     const grouped: HeroItem[][] = [];
@@ -70,88 +73,111 @@ export default function Hero({ sectionRef }: HeroProps) {
   const locale = getLocaleFromPath(pathname || '');
 
   useEffect(() => {
-    fetchData(locale).then(data => {
-      setText(data);
-    });
+    setLoading(true);
+    fetchData(locale)
+      .then(data => {
+        setText(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setLoading(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [locale]);
 
   return (
-    <section ref={sectionRef} className={styles.hero}>
-      <div className={styles.container}>
-        <div className={styles.header_wrap}>
-          <Image
-            src={logo}
-            alt="Mustage logo"
-            className={styles.logo}
-            width={0}
-            height={0}
-            sizes="100vw"
-          />
-          <h1 className={styles.header}>{t('Hero.header')}</h1>
-        </div>
-        <div className={styles.back}></div>
-        <h2 className={styles.logo_text}>{t('Hero.text')}</h2>
-        <div className={styles.block_wrap}>
-          <div className={styles.first_block}>
-            <h3 className={styles.first_block_header}>
-              {text.Hero1stBlockHeader || t('Hero.blocHeader.first')}
-            </h3>
-            <p className={styles.first_block_text}>
-              {text.Hero1stBlock || t('Hero.blockText.first')}
-            </p>
+    <>
+      <section ref={sectionRef} className={styles.hero}>
+        <div className={styles.container}>
+          <div className={styles.header_wrap}>
+            <Image
+              src={logo}
+              alt="Mustage logo"
+              className={styles.logo}
+              width={0}
+              height={0}
+              sizes="100vw"
+            />
+            <h1 className={styles.header}>{t('Hero.header')}</h1>
           </div>
-          <div className={styles.second_block}>
-            <h3 className={styles.second_block_header}>
-              {text.Hero2ndBlockHeader || t('Hero.blocHeader.second')}
-            </h3>
-            <p className={styles.second_block_text}>
-              {text.Hero2dBlock || t('Hero.blockText.second')}
-            </p>
+          <div className={styles.back}></div>
+          <h2 className={styles.logo_text}>{t('Hero.text')}</h2>
+          <div className={styles.block_wrap}>
+            <div className={styles.first_block}>
+              <h3 className={styles.first_block_header}>
+                {text.Hero1stBlockHeader || t('Hero.blocHeader.first')}
+              </h3>
+              <p className={styles.first_block_text}>
+                {text.Hero1stBlock || t('Hero.blockText.first')}
+              </p>
+            </div>
+            <div className={styles.second_block}>
+              <h3 className={styles.second_block_header}>
+                {text.Hero2ndBlockHeader || t('Hero.blocHeader.second')}
+              </h3>
+              <p className={styles.second_block_text}>
+                {text.Hero2dBlock || t('Hero.blockText.second')}
+              </p>
+            </div>
           </div>
-        </div>
-        <div className={styles.main_nav_wrap}>
-          <p className={styles.list_header}>{t('Hero.listHeader')}</p>
-          <div className={styles.nav_wrap}>
-            <div className={styles.prev}></div>
-            <div className={styles.next}></div>
+          <div className={styles.main_nav_wrap}>
+            <p className={styles.list_header}>{t('Hero.listHeader')}</p>
+            <div className={styles.nav_wrap}>
+              <div className={styles.prev}></div>
+              <div className={styles.next}></div>
+            </div>
           </div>
+          <Swiper
+            navigation={{
+              prevEl: `.${styles.prev}`,
+              nextEl: `.${styles.next}`,
+            }}
+            pagination={false}
+            spaceBetween={0}
+            className={styles.slider}
+            modules={[Navigation, Pagination]}
+            loop={true}
+          >
+            {groupedItems.map((group, index) => (
+              <SwiperSlide key={index} className={styles.list}>
+                {group.map((item, subIndex) => (
+                  <div key={subIndex} className={styles.list_item}>
+                    <a
+                      className={styles.list_link}
+                      href={item.link}
+                      target="_blank"
+                    >
+                      <Image
+                        src={item.icon}
+                        alt={item.alt}
+                        className={styles.icon}
+                        width={0}
+                        height={0}
+                        sizes="100vw"
+                      />
+                      <p className={styles.list_text}>{item.text}</p>
+                    </a>
+                  </div>
+                ))}
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-        <Swiper
-          navigation={{
-            prevEl: `.${styles.prev}`,
-            nextEl: `.${styles.next}`,
-          }}
-          pagination={false}
-          spaceBetween={0}
-          className={styles.slider}
-          modules={[Navigation, Pagination]}
-          loop={true}
-        >
-          {groupedItems.map((group, index) => (
-            <SwiperSlide key={index} className={styles.list}>
-              {group.map((item, subIndex) => (
-                <div key={subIndex} className={styles.list_item}>
-                  <a
-                    className={styles.list_link}
-                    href={item.link}
-                    target="_blank"
-                  >
-                    <Image
-                      src={item.icon}
-                      alt={item.alt}
-                      className={styles.icon}
-                      width={0}
-                      height={0}
-                      sizes="100vw"
-                    />
-                    <p className={styles.list_text}>{item.text}</p>
-                  </a>
-                </div>
-              ))}
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-    </section>
+      </section>
+
+      {loading ? (
+        <div className={styles.dots_loading}>
+          <span className={styles.dot}></span>
+          <span className={styles.dot}></span>
+          <span className={styles.dot}></span>
+        </div>
+      ) : (
+        text.MainYoutubeVideoID && (
+          <MainYoutubeVideo videoID={text.MainYoutubeVideoID} />
+        )
+      )}
+    </>
   );
 }

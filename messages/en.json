@@ -16,6 +16,7 @@
   },
   "Hero": {
     "header": "Mustage Team",
+    "video": "Video about us",
     "text": "the perfect place for career growth in the IT industry",
     "listHeader": "Links to our external projects:",
     "blocHeader": {
@@ -31,7 +32,7 @@
     "header": "What we offer",
     "headerText": "By working with us, you will get:",
     "blockHeader": {
-      "first": "Flexible 8-hour work schedule",
+      "first": "Flexible work schedule",
       "second": "Competitive salary",
       "third": "Career growth opportunities",
       "fourth": "Full-time employment",

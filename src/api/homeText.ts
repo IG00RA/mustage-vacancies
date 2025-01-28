@@ -5,6 +5,7 @@ export interface Text {
   Hero2dBlock?: string;
   Hero2ndBlockHeader?: string;
   locale?: string;
+  MainYoutubeVideoID?: string;
 }
 
 const host = process.env.NEXT_PUBLIC_ADMIN_HOST;

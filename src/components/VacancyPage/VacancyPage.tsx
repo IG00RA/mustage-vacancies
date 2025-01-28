@@ -203,6 +203,7 @@ export default function VacancyPage() {
                   allowFullScreen
                   title="YouTube video"
                 />
+                {!showVideo && <div className={styles.video_box}></div>}
                 <button
                   type="button"
                   className={`${styles.video_icon} ${

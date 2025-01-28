@@ -1,0 +1,142 @@
+.description_container {
+  margin: 0 auto;
+  margin-bottom: 96px;
+  width: var(--container);
+  @media (min-width: 1408px) {
+    max-width: var(--desktop);
+  }
+}
+
+.description_header {
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: var(--main_text_color);
+  font-size: var(--fs_xlarge);
+  margin-bottom: 60px;
+  @media (min-width: 768px) {
+    margin-bottom: 80px;
+    font-size: var(--fs_xxxlarge);
+  }
+}
+
+.description_list {
+  padding-left: 16px;
+  @media (min-width: 768px) {
+    padding-left: 32px;
+  }
+}
+
+.description_item {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 12px;
+
+  & svg {
+    flex-shrink: 0;
+    margin-top: 4px;
+    fill: #5551fe;
+  }
+  @media (min-width: 768px) {
+    margin-bottom: 16px;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.description_text {
+  @media (min-width: 768px) {
+    font-size: var(--fs_xsmall);
+  }
+}
+
+.video_wrap {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 328/191;
+  min-height: 150px;
+  padding: 0;
+  border-radius: 32px;
+  background-color: #e1e4f2;
+  @media (min-width: 768px) {
+    padding: 0;
+    border-radius: 40px;
+  }
+
+  @media (min-width: 1024px) {
+    aspect-ratio: 1328/792;
+    min-height: 332px;
+  }
+}
+
+.video {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 24px;
+}
+
+.video_icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 64px;
+  height: 64px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: #e1e4f2;
+  border: 1px solid transparent;
+  transition: border 0.3s ease;
+
+  & svg {
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+  }
+
+  @media (min-width: 768px) {
+    width: 96px;
+    height: 96px;
+    & svg {
+      width: 40px;
+      height: 40px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    width: 180px;
+    height: 180px;
+    & svg {
+      margin-left: 8px;
+      width: 65px;
+      height: 65px;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    border: 1px solid var(--main_color);
+    & svg {
+      transform: scale(0.9);
+    }
+  }
+}
+
+.video_box {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.video_icon_show {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
