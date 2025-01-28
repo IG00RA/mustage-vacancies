@@ -12,7 +12,6 @@ type MainYoutubeVideoProps = {
 
 export default function MainYoutubeVideo({
   videoID,
-  children,
 }: MainYoutubeVideoProps): JSX.Element {
   const t = useTranslations();
   const [showVideo, setShowVideo] = useState(false);

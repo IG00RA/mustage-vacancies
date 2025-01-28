@@ -14,7 +14,6 @@ import Image from 'next/image';
 import { RefObject, useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Text, fetchData } from '@/api/homeText';
-import Icon from '@/helpers/Icon';
 import MainYoutubeVideo from '../MainYoutubeVideo/MainYoutubeVideo';
 
 interface HeroItem {
