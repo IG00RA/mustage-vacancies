@@ -35,7 +35,7 @@ const ukraine = localFont({
   variable: '--font_ukr',
 });
 
-const localeMetadata: Record<
+export const localeMetadata: Record<
   string,
   { title: string; description: string; keywords: string }
 > = {
@@ -82,6 +82,19 @@ export const generateMetadata = async ({
     robots: {
       index: true,
       follow: true,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: metadataValues.title,
+      description: metadataValues.description,
+      images: [
+        {
+          url: '/assets/opengraph-image.png',
+          width: 1200,
+          height: 630,
+          alt: metadataValues.title,
+        },
+      ],
     },
     openGraph: {
       title: metadataValues.title,
