@@ -373,7 +373,7 @@
   background-position: center left 9px;
   background-repeat: no-repeat;
   background-size: 24px 24px;
-
+  -webkit-tap-highlight-color: transparent;
   &:hover {
     box-shadow: 0px 0px 5px 5px #ffffff4d;
   }
@@ -381,11 +381,6 @@
 
 .prev {
   transform: rotate(180deg);
-}
-
-.prev:hover,
-.next:hover {
-  background-color: rgba(213, 217, 242, 0.421);
 }
 
 .dots_loading {

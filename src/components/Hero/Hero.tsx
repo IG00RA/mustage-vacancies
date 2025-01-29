@@ -11,10 +11,11 @@ import { useTranslations } from 'next-intl';
 import { heroItems as originalGalleryImages } from '@/data/data';
 import logo from '../../img/hero/logo.svg';
 import Image from 'next/image';
-import { RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { Text, fetchData } from '@/api/homeText';
 import MainYoutubeVideo from '../MainYoutubeVideo/MainYoutubeVideo';
+import { Swiper as SwiperClass } from 'swiper';
 
 interface HeroItem {
   icon: string;
@@ -32,6 +33,8 @@ export default function Hero({ sectionRef }: HeroProps) {
   const [groupedItems, setGroupedItems] = useState<HeroItem[][]>([]);
   const [text, setText] = useState<Text>(Object);
   const [loading, setLoading] = useState<boolean>(true);
+  const swiperRef = useRef<SwiperClass | null>(null);
+  const [firstClick, setFirstClick] = useState(true);
 
   const groupItems = (items: HeroItem[], groupSize: number): HeroItem[][] => {
     const grouped: HeroItem[][] = [];
@@ -86,6 +89,26 @@ export default function Hero({ sectionRef }: HeroProps) {
       });
   }, [locale]);
 
+  const handleButtonClick = (direction: 'next' | 'prev') => {
+    if (firstClick && swiperRef.current) {
+      if (direction === 'next') {
+        swiperRef.current.slideTo(1);
+      } else {
+        swiperRef.current.slideTo(3);
+      }
+
+      setFirstClick(false);
+    } else {
+      if (swiperRef.current) {
+        if (direction === 'next') {
+          swiperRef.current.slideNext();
+        } else {
+          swiperRef.current.slidePrev();
+        }
+      }
+    }
+  };
+
   return (
     <>
       <section ref={sectionRef} className={styles.hero}>
@@ -124,11 +147,22 @@ export default function Hero({ sectionRef }: HeroProps) {
           <div className={styles.main_nav_wrap}>
             <p className={styles.list_header}>{t('Hero.listHeader')}</p>
             <div className={styles.nav_wrap}>
-              <div className={styles.prev}></div>
-              <div className={styles.next}></div>
+              <button
+                type="button"
+                onClick={() => handleButtonClick('prev')}
+                className={styles.prev}
+              ></button>
+              <button
+                type="button"
+                onClick={() => handleButtonClick('next')}
+                className={styles.next}
+              ></button>
             </div>
           </div>
           <Swiper
+            onSwiper={swiper => {
+              swiperRef.current = swiper;
+            }}
             navigation={{
               prevEl: `.${styles.prev}`,
               nextEl: `.${styles.next}`,

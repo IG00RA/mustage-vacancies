@@ -7,6 +7,7 @@ import tg_channel from '../img/hero/tg_channel.webp';
 import tg_chat from '../img/hero/tg_chat.webp';
 import tik from '../img/hero/tik.webp';
 import youtube from '../img/hero/youtube.webp';
+import team from '../img/hero/team.webp';
 
 export const offerItems = [
   {
@@ -75,7 +76,7 @@ export const heroItems = [
   {
     alt: 'Mustage site logo',
     text: 'Про Mustage Team',
-    icon: logo_link,
+    icon: team,
     link: 'https://mustage.team/',
   },
   {
