@@ -83,14 +83,11 @@ export async function fetchVacancyById(
   } else {
     url = `${host}/api/vacancies/${id}?locale=${lang}&populate=*`;
   }
-  console.log('url', url);
   const response = await fetch(url);
-  console.log('response', response);
   if (!response.ok) {
     throw new Error(`Failed to fetch vacancy: ${response.statusText}`);
   }
 
   const data = await response.json();
-  console.log('data', data);
   return data.data;
 }
