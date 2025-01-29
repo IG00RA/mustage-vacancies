@@ -12,7 +12,7 @@ export const generateMetadata = async ({
 }: Props): Promise<Metadata> => {
   try {
     const { locale, id } = await params;
-    const vacancy = await fetchVacancyById(id, locale);
+    const vacancy = await fetchVacancyById(id, locale,true);
     console.log('vacancy front', vacancy);
     return {
       title: `${vacancy.Title} | Mustage Team` || 'Mustage Vacancy',

@@ -49,6 +49,7 @@ export interface Vacancy {
 }
 
 const host = process.env.NEXT_PUBLIC_ADMIN_HOST;
+const hostBack = process.env.NEXT_PUBLIC_ADMIN_HOST_BACK;
 
 export async function fetchVacancies(locale: string): Promise<Vacancy[]> {
   let lang = locale;
@@ -69,13 +70,19 @@ export async function fetchVacancies(locale: string): Promise<Vacancy[]> {
 
 export async function fetchVacancyById(
   id: string | string[] | undefined,
-  locale: string
+  locale: string,
+  isBack = false
 ): Promise<Vacancy> {
   let lang = locale;
   if (locale === 'uk') {
     lang = 'uk-UA';
   }
-  const url = `${host}/api/vacancies/${id}?locale=${lang}&populate=*`;
+  let url;
+  if (isBack) {
+    url = `${hostBack}/api/vacancies/${id}?locale=${lang}&populate=*`;
+  } else {
+    url = `${host}/api/vacancies/${id}?locale=${lang}&populate=*`;
+  }
   console.log('url', url);
   const response = await fetch(url);
   console.log('response', response);
