@@ -8,6 +8,7 @@ import tg_chat from '../img/hero/tg_chat.webp';
 import tik from '../img/hero/tik.webp';
 import youtube from '../img/hero/youtube.webp';
 import team from '../img/hero/team.webp';
+import academy from '../img/hero/academy.svg';
 
 export const offerItems = [
   {
@@ -82,7 +83,7 @@ export const heroItems = [
   {
     alt: 'Mustage Academy logo',
     text: 'Mustage Academy',
-    icon: logo_link,
+    icon: academy,
     link: 'https://academy.mustage.team/',
   },
   {
