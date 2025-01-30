@@ -1,7 +1,6 @@
 import creo from '../img/hero/creo.svg';
 import proxy from '../img/hero/proxy.svg';
 import store from '../img/hero/store.svg';
-import logo_link from '../img/hero/logo_link.svg';
 import insta from '../img/hero/insta.webp';
 import tg_channel from '../img/hero/tg_channel.webp';
 import tg_chat from '../img/hero/tg_chat.webp';
