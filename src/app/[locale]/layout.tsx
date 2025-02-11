@@ -74,7 +74,7 @@ export const generateMetadata = async ({
 
   return {
     metadataBase: new URL(
-      process.env.NEXT_PUBLIC_SITE_URL || 'hhttp://vacancies.mustage.team'
+      process.env.NEXT_PUBLIC_SITE_URL || 'https://vacancies.mustage.team'
     ),
     title: metadataValues.title,
     description: metadataValues.description,
