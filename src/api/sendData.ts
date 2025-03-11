@@ -55,8 +55,12 @@ function getParamString(queryParams: QueryParams): string {
 }
 
 export const sendToGoogleScript = async (data: FormData) => {
+  const pageTitle =
+    typeof window !== 'undefined' ? document.title : 'Не вказано';
+  const vacancy = pageTitle.split('|')[0]?.trim() || 'Не вказано';
   const requestData = {
     ...data,
+    vacancy,
     url,
     ...getQueryParams(),
   };
@@ -84,10 +88,13 @@ export const sendMessage = async (sendData: FormData): Promise<void> => {
   let botMessage;
   botMessage = '<b>Користувач відправив форму:</b>\n';
   botMessage += 'Імя: <b>' + sendData.name + '</b>\n';
+  const pageTitle =
+    typeof window !== 'undefined' ? document.title : 'Не вказано';
+  const vacancy = pageTitle.split('|')[0]?.trim() || 'Не вказано';
+  botMessage += 'Вакансія: <b>' + vacancy + '</b>\n';
   botMessage += 'Telegram: <b>' + sendData.username + '</b>\n';
   botMessage += 'Коментар: <b>' + sendData.comment + '</b>\n';
   botMessage += 'Резюме: <b>' + sendData.resumeLink + '</b>\n';
-
   botMessage += 'Url: <b>' + url + '</b>\n';
 
   const params = getQueryParams();
