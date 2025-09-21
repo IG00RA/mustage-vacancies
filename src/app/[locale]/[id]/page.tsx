@@ -2,6 +2,7 @@ import { fetchVacancyById } from '@/api/vacancies';
 import Header from '@/components/Header/Header';
 import VacancyPage from '@/components/VacancyPage/VacancyPage';
 import { Metadata } from 'next';
+import Script from 'next/script';
 
 type Props = {
   params: Promise<{ id: string; locale: string }>;
@@ -56,6 +57,19 @@ export const generateMetadata = async ({
 export default function Page() {
   return (
     <>
+      {/* Google Tag Manager */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-10954010722"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-10954010722');
+        `}
+      </Script>
       <Header headerStyle={true} />
       <main>
         <VacancyPage />

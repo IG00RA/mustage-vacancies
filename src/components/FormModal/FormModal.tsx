@@ -7,6 +7,7 @@ import { ChangeEvent, FormEvent, useState, MouseEvent } from 'react';
 import { toast } from 'react-toastify';
 import { sendMessage, sendToGoogleScript } from '@/api/sendData';
 import { useRef } from 'react';
+import Script from 'next/script';
 
 type FormModalProps = {
   closeModal: () => void;
@@ -144,6 +145,12 @@ export default function FormModal({ closeModal }: FormModalProps) {
 
       toast.success(t('Form.form.ok'));
 
+      if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+        window.gtag('event', 'conversion', {
+          send_to: 'AW-10954010722',
+        });
+      }
+
       setFormData(initialFormData);
       setErrors({ name: '', resumeLink: '', resumeFile: '' });
       if (hiddenFileInputRef.current) {
@@ -158,6 +165,19 @@ export default function FormModal({ closeModal }: FormModalProps) {
 
   return (
     <section id="contacts" className={styles.form}>
+      {/* Google Tag при відкритті модалки */}
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=AW-10954010722"
+        strategy="afterInteractive"
+      />
+      <Script id="gtag-init" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-10954010722');
+        `}
+      </Script>
       <button
         className={styles.close_button}
         type="button"
